@@ -19,7 +19,7 @@ include("connect.php");
         <form method="post" action="submitItem.php">
           <div class="input-group">
              <i class="fas fa-lock"></i>
-             <input type="text" name="fCode" id="fCode" placeholder="Filter Code" required>
+             <input type="number" name="fCode" id="fCode" placeholder="Filter Code" required>
              <label for="fCode">Filter Code</label>
           </div>
           <div class="input-group">
@@ -28,26 +28,25 @@ include("connect.php");
               <label for="fName">Filter Name</label>
           </div>
           <div class="input-group">
-              <i class="fas fa-hammer"></i>
-              <input type="email" name="email" id="email" placeholder="Materials" required>
-              <label for="email">Materials</label>
+              <textarea id="materials" name="materials" placeholder="Materials" rows="4" cols="49"></textarea>
+              <label for="materials">Materials</label>
           </div>
           <div class="input-group">
               <i class="fas fa-cog"></i>
-              <input type="password" name="password" id="password" placeholder="Quantity" required>
+              <input type="number" name="quantity" id="quantity" placeholder="Quantity" required>
               <label for="password">Quantity</label>
           </div>
           <div class="input-group">
-              <i class="fas fa-bar"></i>
-              <input type="password" name="password" id="password" placeholder="Maximum Stock" required>
-              <label for="password">Maximum Stock</label>
+              <i class="fas fa-clipboard"></i>
+              <input type="number" name="maxStock" id="maxStock" placeholder="Maximum Stock Level" required>
+              <label for="password">Maximum Stock Level</label>
           </div>
           <div class="input-group">
-              <i class="fas fa-lock"></i>
-              <input type="password" name="password" id="password" placeholder="Low Stock Signal" required>
+              <i class="fas fa-clipboard"></i>
+              <input type="number" name="lowStock" id="lowStock" placeholder="Low Stock Signal" required>
               <label for="password">Low Stock Signal</label>
           </div>
-         <input type="submit" class="btn" value="Sumit Item" name="submitButton">
+         <input type="submit" class="btn" value="Submit Item" name="submitButton">
         </form>
       </div>
     </form>
