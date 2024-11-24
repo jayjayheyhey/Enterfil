@@ -20,8 +20,9 @@ include("connect.php");
         <form method ="post" action="addInterface.php">
             <input type="submit" class="btn" value="Add Item" name="addItemButton">
         </form>
-        
-
+        <form method ="post" action="changeQuantity.php">
+            <input type="submit" class="btn" value="Add/Subtract Quantity" name="editQuantityButton">
+        </form>
     </div>
 </body>
 </html>
