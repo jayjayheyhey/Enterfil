@@ -3,20 +3,22 @@
 include 'connect.php';
 
 if(isset($_POST['submitButton'])){
-    $firstName=$_POST['fName'];
-    $lastName=$_POST['lName'];
-    $email=$_POST['email'];
-    $password=$_POST['password'];
-    $password=md5($password);
+    $FilterCode=$_POST['fCode'];
+    $FilterName=$_POST['fName'];
+    $Materials=$_POST['materials'];
+    $Quantity=$_POST['quantity'];
+    $MaxStock=$_POST['maxStock'];
+    $LowStockSignal=$_POST['lowStock'];
 
-     $checkEmail="SELECT * From users where email='$email'";
-     $result=$conn->query($checkEmail);
+
+     $checkCode="SELECT * From filters where FilterCode='$FilterCode'";
+     $result=$conn->query($checkCode);
      if($result->num_rows>0){
-        echo "Email Address Already Exists !";
+        echo "Filter Code Already Exists !";
      }
      else{
-        $insertQuery="INSERT INTO users(firstName,lastName,email,password)
-                       VALUES ('$firstName','$lastName','$email','$password')";
+        $insertQuery="INSERT INTO filters(FilterCode,FilterName,Materials,Quantity,MaxStock,LowStockSignal)
+                       VALUES ('$FilterCode','$FilterName','$Materials','$Quantity','$MaxStock','$LowStockSignal')";
             if($conn->query($insertQuery)==TRUE){
                 header("location: index.php");
             }
