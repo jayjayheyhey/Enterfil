@@ -26,6 +26,15 @@ form{
     padding:1.3rem;
     margin-bottom:0.4rem;
 }
+textarea{
+    color:inherit;
+    width:100%;
+    background-color:transparent;
+    border:none;
+    border-bottom:1px solid #757575;
+    padding-left:1.5rem;
+    font-size:15px;
+}
 input{
     color:inherit;
     width:100%;
@@ -64,6 +73,31 @@ input:focus~label,input:not(:placeholder-shown)~label{
     top:-3em;
     color:hsl(327,90%,28%);
     font-size:15px;
+}
+textarea {
+    color: inherit;
+    width: 100%;
+    background-color: transparent;
+    border: solid #757575;
+    padding-left: 1.5rem;
+    font-size: 15px;
+    resize: none;
+}
+
+textarea:focus {
+    background-color: transparent;
+    outline: transparent;
+    border: 2px solid hsl(327, 90%, 28%);
+}
+
+textarea::placeholder {
+    color: transparent;
+}
+
+textarea:focus~label,textarea:not(:placeholder-shown)~label {
+    top: -7em;
+    color: hsl(327, 90%, 28%);
+    font-size: 15px;
 }
 .recover{
     text-align:right;
