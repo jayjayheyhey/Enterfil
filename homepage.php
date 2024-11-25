@@ -31,7 +31,6 @@ include("connect.php");
         </form>
 
          <!-- Display Filters Table -->
-         <h2>Filters Table</h2>
         <table>
             <thead>
                 <tr>
