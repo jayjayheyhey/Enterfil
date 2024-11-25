@@ -23,6 +23,9 @@ include("connect.php");
           </div>
          <input type="submit" class="btn" value="Search" name="searchButton">
         </form>
+        <form method="post" action="homepage.php">
+            <input type="submit" class="btn" value="Back to Dashboard">
+        </form>
       </div>
     </form>
 </body>
