@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['FilterCode'])) {
     $sql = "DELETE FROM filters WHERE FilterCode = '$FilterCode'";
 
     if ($conn->query($sql) === TRUE) {
-        $message = "Filter with code $FilterCode was successfully deleted.";
+        header("Location: homepage.php"); // Redirect to dashboard
     } else {
         $message = "Error deleting filter: " . $conn->error;
     }
@@ -34,9 +34,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['FilterCode'])) {
         <?php if (isset($message)) { echo "<p>$message</p>"; } ?>
         
         <form method="post" action="">
-            <input type="text" id="FilterCode" name="FilterCode" required>
-            <label for="FilterCode">Enter Filter Code:</label>
-            <button type="submit" class="btn">Delete Filter</button>
+            <input type="text" name="FilterCode" id="FilterCode" placeholder="Filter Code" required>
+            <label for="fCode">Filter Code</label>
+            <input type="submit" class="btn" value="Delete Filter">
         </form>
 
         <!-- Go back to dashboard -->
