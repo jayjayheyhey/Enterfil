@@ -19,7 +19,7 @@ include("connect.php");
         <form method="post" action="submitItem.php">
           <div class="input-group">
              <i class="fas fa-lock"></i>
-             <input type="number" name="fCode" id="fCode" placeholder="Filter Code" required>
+             <input type="text" name="fCode" id="fCode" placeholder="Filter Code" required>
              <label for="fCode">Filter Code</label>
           </div>
           <div class="input-group">
