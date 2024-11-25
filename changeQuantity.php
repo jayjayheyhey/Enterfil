@@ -5,12 +5,13 @@ include('connect.php');
 // Initialize variables
 $FilterCode = '';
 $currentQuantity = 0;
+$maxStock = 0;
 
 if (isset($_GET['FilterCode']) && !empty($_GET['FilterCode'])) {
     $FilterCode = $_GET['FilterCode'];
 
-    // Use a prepared statement to prevent SQL injection
-    $stmt = $conn->prepare("SELECT Quantity FROM filters WHERE FilterCode = ?");
+    // Fetch current quantity and max stock
+    $stmt = $conn->prepare("SELECT Quantity, MaxStock FROM filters WHERE FilterCode = ?");
     $stmt->bind_param("s", $FilterCode);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -18,6 +19,7 @@ if (isset($_GET['FilterCode']) && !empty($_GET['FilterCode'])) {
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         $currentQuantity = $row['Quantity'];
+        $maxStock = $row['MaxStock'];
     } else {
         echo "Filter Code not found.";
         exit();
@@ -32,15 +34,20 @@ if (isset($_POST['submitQuantityButton'])) {
         exit();
     }
 
+    // Get the values from the form
     $quantityChangeAdd = isset($_POST['quantityAdd']) ? (int)$_POST['quantityAdd'] : 0;
     $quantityChangeSubtract = isset($_POST['quantitySubtract']) ? (int)$_POST['quantitySubtract'] : 0;
 
     // Calculate the new quantity
     $newQuantity = $currentQuantity + $quantityChangeAdd - $quantityChangeSubtract;
 
-    // Ensure the new quantity is not negative
+    // Validate the new quantity
     if ($newQuantity < 0) {
-        echo "The resulting quantity cannot be negative.";
+        echo "The resulting quantity cannot be less than 0.";
+        exit();
+    }
+    if ($newQuantity > $maxStock) {
+        echo "The resulting quantity cannot exceed the maximum stock of $maxStock.";
         exit();
     }
 
@@ -58,7 +65,6 @@ if (isset($_POST['submitQuantityButton'])) {
     }
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -85,17 +91,18 @@ if (isset($_POST['submitQuantityButton'])) {
     <div class="container" id="updateQuantity" style="<?php echo !empty($FilterCode) ? 'display:block;' : 'display:none;'; ?>">
         <h1 class="form-title">Change Quantity</h1>
         <p><strong>Code:</strong> <?php echo htmlspecialchars($FilterCode); ?></p>
-        <p><strong>Current Quantity:</strong> <?php echo htmlspecialchars($currentQuantity); ?></p><br>
+        <p><strong>Current Quantity:</strong> <?php echo htmlspecialchars($currentQuantity); ?></p>
+        <p><strong>Max Stock:</strong> <?php echo htmlspecialchars($maxStock); ?></p><br>
 
         <form method="post" action="changeQuantity.php?FilterCode=<?php echo urlencode($FilterCode); ?>">
             <div class="input-group">
                 <i class="fas fa-calculator"></i>
-                <input type="number" name="quantityAdd" id="quantityAdd" placeholder="Add Quantity">
+                <input type="number" name="quantityAdd" id="quantityAdd" placeholder="Add Quantity" min="0">
                 <label for="quantityAdd">Add Quantity</label>
             </div>
             <div class="input-group">
                 <i class="fas fa-calculator"></i>
-                <input type="number" name="quantitySubtract" id="quantitySubtract" placeholder="Subtract Quantity">
+                <input type="number" name="quantitySubtract" id="quantitySubtract" placeholder="Subtract Quantity" min="0">
                 <label for="quantitySubtract">Subtract Quantity</label>
             </div>
             <input type="submit" class="btn" value="Submit Quantity Change" name="submitQuantityButton">
