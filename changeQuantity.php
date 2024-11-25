@@ -77,7 +77,7 @@ if (isset($_POST['submitQuantityButton'])) {
 </head>
 <body>
     <div class="container" id="enterFilterCode" style="<?php echo empty($FilterCode) ? 'display:block;' : 'display:none;'; ?>">
-        <h1 class="form-title">Enter Filter Code</h1>
+        <h1 class="form-title">Edit Quantity</h1>
         <form method="get" action="changeQuantity.php">
             <div class="input-group">
                 <i class="fas fa-clipboard"></i>
@@ -85,6 +85,9 @@ if (isset($_POST['submitQuantityButton'])) {
                 <label for="FilterCode">Filter Code</label>
             </div>
             <input type="submit" class="btn" value="Submit Filter Code" name="submitFilterCode">
+        </form>
+        <form method="post" action="homepage.php">
+            <input type="submit" class="btn" value="Back to Dashboard">
         </form>
     </div>
 
