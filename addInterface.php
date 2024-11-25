@@ -48,6 +48,9 @@ include("connect.php");
           </div>
          <input type="submit" class="btn" value="Submit Item" name="submitButton">
         </form>
+        <form method="post" action="homepage.php">
+            <input type="submit" class="btn" value="Back to Dashboard">
+        </form>
       </div>
     </form>
 </body>
