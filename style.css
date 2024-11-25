@@ -10,7 +10,7 @@ body{
 }
 .container{
     background:#fff;
-    width:900px;
+    width:450px;
     padding:1.5rem;
     margin:50px auto;
     border-radius:10px;
@@ -51,6 +51,9 @@ input{
     border-bottom:1px solid #757575;
     padding-left:1.5rem;
     font-size:15px;
+}
+input[value="Delete Filter"],
+input[value="Back to Dashboard"] {
     margin: 1rem 0;
 }
 .input-group{
@@ -91,6 +94,7 @@ textarea {
     padding-left: 1.5rem;
     font-size: 15px;
     resize: none;
+    margin: 1rem 0;
 }
 
 textarea:focus {
@@ -104,7 +108,6 @@ textarea::placeholder {
 }
 
 textarea:focus~label,textarea:not(:placeholder-shown)~label {
-    top: -7em;
     color: hsl(327, 90%, 28%);
     font-size: 15px;
 }
