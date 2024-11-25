@@ -38,7 +38,7 @@ if(isset($row) && !empty($row)) {
         <form method="post" action="updateFilter.php">
           <div class="input-group">
              <i class="fas fa-lock"></i>
-             <input type="number" name="fCode" id="fCode" placeholder="Filter Code" required value="<?php echo isset($row['FilterCode']) ? $row['FilterCode'] : ''; ?>" disabled>
+             <input type="text" name="fCode" id="fCode" placeholder="Filter Code" required value="<?php echo isset($row['FilterCode']) ? $row['FilterCode'] : ''; ?>" disabled>
              <label for="fCode">You have selected filter:</label>
           </div>
           
