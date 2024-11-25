@@ -20,7 +20,7 @@ if(isset($_POST['submitButton'])){
         $insertQuery="INSERT INTO filters(FilterCode,FilterName,Materials,Quantity,MaxStock,LowStockSignal)
                        VALUES ('$FilterCode','$FilterName','$Materials','$Quantity','$MaxStock','$LowStockSignal')";
             if($conn->query($insertQuery)==TRUE){
-                header("location: index.php");
+                header("location: homepage.php");
             }
             else{
                 echo "Error:".$conn->error;
