@@ -1,0 +1,106 @@
+/* dashboard.css */
+
+/* General Styles */
+body {
+    background-color: #c9d6ff;
+    background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+    font-family:"poppins",sans-serif;
+}
+
+.container {
+    background: #fff;
+    width: 900px;
+    padding: 1.5rem;
+    margin: 50px auto;
+    border-radius: 10px;
+    box-shadow: 0 20px 35px rgba(0, 0, 1, 0.9);
+}
+
+/* Dashboard Title */
+.form-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 1.3rem;
+    margin-bottom: 0.4rem;
+}
+
+/* Buttons */
+form {
+    display: inline-block;
+    margin: 0.5rem;
+}
+
+.btn {
+    font-size: 1.1rem;
+    padding: 8px 20px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    background: rgb(125, 125, 235);
+    color: white;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.btn:hover {
+    background: #07001f;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+}
+
+thead {
+    background-color: rgb(125, 125, 235);
+    color: white;
+}
+
+thead th {
+    text-align: left;
+    padding: 10px;
+    font-size: 1rem;
+}
+
+tbody td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    font-size: 0.9rem;
+}
+
+/* Color Coding for Quantity */
+.quantity-low {
+    background-color: #f54242; /* Red for low stock */
+    color: white;
+    text-align: center;
+}
+
+.quantity-medium {
+    background-color: #ffe135; /* Yellow for medium stock */
+    text-align: center;
+}
+
+.quantity-high {
+    background-color: #80ff80; /* Green for sufficient stock */
+    text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    table {
+        font-size: 0.85rem;
+    }
+
+    .btn {
+        font-size: 1rem;
+        padding: 5px 15px;
+    }
+}
