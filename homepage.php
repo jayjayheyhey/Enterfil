@@ -24,10 +24,10 @@ include("connect.php");
             <input type="submit" class="btn" value="Add/Subtract Quantity" name="editQuantityButton">
         </form>
         <form method="post" action="removeItem.php">
-            <input type="submit" class="btn" value="Remove Filter" name="removeFilterButton">
+            <input type="submit" class="btn" value="Remove Item" name="removeFilterButton">
         </form>
         <form method ="post" action="searchFilterInterface.php">
-            <input type="submit" class="btn" value="Edit Filter" name="editFitlterButton">
+            <input type="submit" class="btn" value="Edit Item" name="editFitlterButton">
         </form>
 
          <!-- Display Filters Table -->
