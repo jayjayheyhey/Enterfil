@@ -23,6 +23,12 @@ include("connect.php");
         <form method ="post" action="changeQuantity.php">
             <input type="submit" class="btn" value="Add/Subtract Quantity" name="editQuantityButton">
         </form>
+        <form method="post" action="removeItem.php">
+            <input type="submit" class="btn" value="Remove Filter" name="removeFilterButton">
+        </form>
+        <form method ="post" action="searchFilterInterface.php">
+            <input type="submit" class="btn" value="Edit Filter" name="editFitlterButton">
+        </form>
     </div>
 </body>
 </html>
