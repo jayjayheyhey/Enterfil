@@ -29,13 +29,13 @@ include("connect.php");
         <form method ="post" action="searchFilterInterface.php">
             <input type="submit" class="btn" value="Edit Item" name="editFitlterButton">
         </form>
-        <form method ="post">
-            <input type="text" class="form-control" id="live_search" autocomplete="off"
-                placeholder="Search ... ">
-        </form>
-        <div id="searchresult"></div>
+        <form method="post">
+    <input type="text" class="form-control" id="live_search" autocomplete="off" placeholder="Search Filter Code or Name...">
+</form>
+<div id="searchresult"></div>
 
-        
+
+        <div id="searchresult"></div>
          <!-- Display Filters Table -->
         <div id="filters_table">
             <table>
