@@ -89,6 +89,61 @@ tbody td {
     text-align: center;
 }
 
+/* Search Bar Styles */
+.live_search {
+    width: 80%;
+    padding: 10px;
+    margin: 1rem auto;
+    font-size: 1rem;
+    border: 2px solid #7d7deb;
+    border-radius: 5px;
+    outline: none;
+    transition: 0.3s ease;
+    display: block;
+}
+
+#live_search:focus {
+    border-color: #07001f;
+    box-shadow: 0 0 8px rgba(7, 0, 31, 0.8);
+}
+
+/* Search Results Styles */
+#searchresult {
+    margin-top: 1rem;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    display: none; /* Initially hidden */
+}
+
+#searchresult table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#searchresult thead {
+    background-color: #7d7deb;
+    color: white;
+}
+
+#searchresult th, #searchresult td {
+    padding: 10px;
+    text-align: center;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #ddd;
+}
+
+#searchresult tbody tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+/* Smooth Fade-In Animation */
+#searchresult {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .container {
@@ -103,5 +158,16 @@ tbody td {
     .btn {
         font-size: 1rem;
         padding: 5px 15px;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
