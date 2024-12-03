@@ -14,18 +14,36 @@ if(isset($_POST['submitButton'])){
      $checkCode="SELECT * From filters where FilterCode='$FilterCode'";
      $result=$conn->query($checkCode);
      if($result->num_rows>0){
-        echo "Filter Code Already Exists !";
-     }
-     else{
-        $insertQuery="INSERT INTO filters(FilterCode,FilterName,Materials,Quantity,MaxStock,LowStockSignal)
-                       VALUES ('$FilterCode','$FilterName','$Materials','$Quantity','$MaxStock','$LowStockSignal')";
-            if($conn->query($insertQuery)==TRUE){
-                header("location: homepage.php");
-            }
-            else{
-                echo "Error:".$conn->error;
-            }
-     }
+        echo '<script>
+                    alert("ERROR: Filter Code Already Exists.");
+                    window.location.href = "addInterface.php";
+                </script>';
+     } else{
+        if ($Quantity > $MaxStock) {
+            echo '<script>
+                    alert("ERROR: Quantity can not be larger than the maximum stock.");
+                    window.location.href = "addInterface.php";
+                </script>';
+        } elseif ($Quantity < $LowStockSignal) {
+            echo '<script>
+                    alert("ERROR: Quantity can not be smaller than the low stock indicator.");
+                    window.location.href = "addInterface.php";
+                </script>';
+        } else{
+            $insertQuery="INSERT INTO filters(FilterCode,FilterName,Materials,Quantity,MaxStock,LowStockSignal)
+                        VALUES ('$FilterCode','$FilterName','$Materials','$Quantity','$MaxStock','$LowStockSignal')";
+                if($conn->query($insertQuery)==TRUE){
+                    echo '<script>
+                            alert("Filter successfully updated");
+                            window.location.href = "homepage.php";
+                        </script>';
+                    exit();
+                }   
+                else{
+                    echo "Error:".$conn->error;
+                }
+        }
+    }
 }
 
 ?>
