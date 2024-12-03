@@ -1,7 +1,6 @@
 <?php
 session_start();
 include("connect.php");
-
 ?>  
 
 <!DOCTYPE html>
@@ -50,7 +49,6 @@ include("connect.php");
         </form>
         <form method="post" action="homepage.php">
             <input type="submit" class="btn" value="Back to Dashboard">
-        </form>
+        </form> 
       </div>
-    </form>
 </body>
