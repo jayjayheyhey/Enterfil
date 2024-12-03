@@ -9,6 +9,7 @@ if(isset($_POST['updateButton'])){
     $MaxStock = $_POST['maxStock'];
     $LowStockSignal = $_POST['lowStock'];
 
+
     $updateQuery = "UPDATE filters 
                     SET FilterName = '$FilterName', 
                         Materials = '$Materials', 
@@ -18,7 +19,11 @@ if(isset($_POST['updateButton'])){
                     WHERE FilterCode = '$FilterCode'";
 
     if($conn->query($updateQuery) === TRUE){
-        header("refresh:0; url=homepage.php");  
+        echo '<script>
+            alert("Filter successfully updated");
+            window.location.href = "homepage.php";
+          </script>';
+        exit();
     } else {
         echo "Error: " . $conn->error; 
     }
