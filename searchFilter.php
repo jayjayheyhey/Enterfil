@@ -10,8 +10,7 @@ if(isset($_POST['searchButton'])){
         $row = $result->fetch_assoc();
     }
     else{
-        echo "Filter does not exist!";
-        header("refresh:3;url=homepage.php");
+        header("Location: searchFilterInterface.php?error=1");
         exit;
     }
 }
@@ -48,26 +47,26 @@ if(isset($row) && !empty($row)) {
           <div class="input-group">
               <i class="fas fa-book"></i>
               <input type="text" name="fName" id="fName" placeholder="Filter Name" required value="<?php echo isset($row['FilterName']) ? $row['FilterName'] : ''; ?>">
-              <label for="fName">Update Filter Name</label>
+              <label for="fName">UDPATE: Filter Name</label>
           </div>
           <div class="input-group">
               <textarea id="materials" name="materials" placeholder="Materials" rows="4" cols="49"><?php echo isset($row['Materials']) ? $row['Materials'] : ''; ?></textarea>
-              <label for="materials">Update Materials</label>
+              <label for="materials">UPDATE: Materials</label>
           </div>
           <div class="input-group">
               <i class="fas fa-cog"></i>
               <input type="number" name="quantity" id="quantity" placeholder="Quantity" required value="<?php echo isset($row['Quantity']) ? $row['Quantity'] : ''; ?>">
-              <label for="password">Update Quantity</label>
+              <label for="password">UPDATE: Quantity</label>
           </div>
           <div class="input-group">
               <i class="fas fa-clipboard"></i>
               <input type="number" name="maxStock" id="maxStock" placeholder="Maximum Stock Level" required value="<?php echo isset($row['MaxStock']) ? $row['MaxStock'] : ''; ?>">
-              <label for="password">Update Maximum Stock Level</label>
+              <label for="password">UPDATE: Maximum Stock Level</label>
           </div>
           <div class="input-group">
               <i class="fas fa-clipboard"></i>
               <input type="number" name="lowStock" id="lowStock" placeholder="Low Stock Signal" required value="<?php echo isset($row['LowStockSignal']) ? $row['LowStockSignal'] : ''; ?>">
-              <label for="password">Update Low Stock Signal</label>
+              <label for="password">UPDATE: Low Stock Signal</label>
           </div>
          <input type="submit" class="btn" value="Update Filter" name="updateButton">
         </form>
