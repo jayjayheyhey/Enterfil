@@ -1,6 +1,14 @@
 <?php
 session_start();
 include('connect.php');
+include("filters_table.php");
+
+
+if(isset($_GET['error']) && $_GET['error'] == 1) {
+    echo '<script>alert("ERROR: The resulting quantity cannot be less than 0.");</script>';
+} else if(isset($_GET['error']) && $_GET['error'] == 2) {
+    echo '<script>alert("ERROR: The resulting quantity cannot exceed the maximum stock.");</script>';
+} 
 
 // Initialize variables
 $FilterCode = '';
@@ -43,11 +51,11 @@ if (isset($_POST['submitQuantityButton'])) {
 
     // Validate the new quantity
     if ($newQuantity < 0) {
-        echo "The resulting quantity cannot be less than 0.";
+        header("Location: changeQuantity.php?error=1");
         exit();
     }
     if ($newQuantity > $maxStock) {
-        echo "The resulting quantity cannot exceed the maximum stock of $maxStock.";
+        header("Location: changeQuantity.php?error=2");
         exit();
     }
 
@@ -73,10 +81,11 @@ if (isset($_POST['submitQuantityButton'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Change Quantity</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="tablestyle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-    <div class="container" id="enterFilterCode" style="<?php echo empty($FilterCode) ? 'display:block;' : 'display:none;'; ?>">
+    <div class="ShowTableContainer" id="enterFilterCode" style="<?php echo empty($FilterCode) ? 'display:block;' : 'display:none;'; ?>">
         <h1 class="form-title">Edit Quantity</h1>
         <form method="get" action="changeQuantity.php">
             <div class="input-group">
@@ -89,6 +98,10 @@ if (isset($_POST['submitQuantityButton'])) {
         <form method="post" action="homepage.php">
             <input type="submit" class="btn" value="Back to Dashboard">
         </form>
+        <!--Display Filters Table-->
+        <?php
+            renderFiltersTable($conn);
+        ?>
     </div>
 
     <div class="container" id="updateQuantity" style="<?php echo !empty($FilterCode) ? 'display:block;' : 'display:none;'; ?>">
