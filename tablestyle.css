@@ -1,0 +1,41 @@
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+    text-align: center;
+}
+
+thead {
+    background-color: rgb(125, 125, 235);
+    color: white;
+}
+
+thead th {
+    text-align: center;
+    padding: 10px;
+    font-size: 1rem;
+}
+
+tbody td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    font-size: 0.9rem;
+}
+
+/* Color Coding for Quantity */
+.quantity-low {
+    background-color: #f54242; /* Red for low stock */
+    color: white;
+    text-align: center;
+}
+
+.quantity-medium {
+    background-color: #ffe135; /* Yellow for medium stock */
+    text-align: center;
+}
+
+.quantity-high {
+    background-color: #80ff80; /* Green for sufficient stock */
+    text-align: center;
+}
