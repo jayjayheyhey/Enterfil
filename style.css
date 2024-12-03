@@ -8,6 +8,15 @@ body{
     background-color: #c9d6ff;
     background:linear-gradient(to right,#e2e2e2,#c9d6ff);
 }
+
+.ShowTableContainer{
+    background: #fff;
+    width: 900px;
+    padding: 1.5rem;
+    margin: 50px auto;
+    border-radius: 10px;
+    box-shadow: 0 20px 35px rgba(0, 0, 1, 0.9);
+}
 .container{
     background:#fff;
     width:450px;
@@ -17,15 +26,7 @@ body{
     box-shadow:0 20px 35px rgba(0,0,1,0.9);
 }
 form{
-    margin:0 2rem;
-}
-p {
-    font-size: 1rem;
-    line-height: 3;
-    margin: 0.5rem 0;
-    padding-left: 1.5rem;
-    color: #333;
-    background-color: #f9f9f9;
+    margin:1rem 2rem;
 }
 .form-title{
     font-size:1.5rem;
@@ -33,15 +34,6 @@ p {
     text-align:center;
     padding:1.3rem;
     margin-bottom:0.4rem;
-}
-textarea{
-    color:inherit;
-    width:100%;
-    background-color:transparent;
-    border:none;
-    border-bottom:1px solid #757575;
-    padding-left:1.5rem;
-    font-size:15px;
 }
 input{
     color:inherit;
@@ -52,10 +44,12 @@ input{
     padding-left:1.5rem;
     font-size:15px;
 }
-input[value="Delete Filter"],
-input[value="Back to Dashboard"] {
+
+input[value="Add Filter"],
+input[value="Edit Filter"] {
     margin: 1rem 0;
 }
+
 .input-group{
     padding:1% 0;
     position:relative;
