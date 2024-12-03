@@ -1,0 +1,21 @@
+
+.form-control {
+    width: 100%; 
+    max-width: 200px; 
+    padding: 5px 10px; 
+    border: 2px solid #ccc; 
+    border-radius: 50px; 
+    font-size: 16px; 
+    outline: none; 
+    box-shadow: none;
+}
+
+.form-control::placeholder {
+    color: rgba(128, 128, 128, 0.5);
+    font-style: italic; 
+}
+
+
+.form-control:focus {
+    border-color: rgb(125, 125, 235);
+}
