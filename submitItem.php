@@ -24,9 +24,9 @@ if(isset($_POST['submitButton'])){
                     alert("ERROR: Quantity can not be larger than the maximum stock.");
                     window.location.href = "addInterface.php";
                 </script>';
-        } elseif ($Quantity < $LowStockSignal) {
+        } elseif ($Quantity < 0) {
             echo '<script>
-                    alert("ERROR: Quantity can not be smaller than the low stock indicator.");
+                    alert("ERROR: Quantity can not be lower than 0.");
                     window.location.href = "addInterface.php";
                 </script>';
         } else{
