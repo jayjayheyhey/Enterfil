@@ -3,15 +3,15 @@
 include 'connect.php';
 
 if(isset($_POST['signIn'])){
-   $email=$_POST['email'];
+   $username=$_POST['username'];
    $password=$_POST['password'];
    
-   $sql="SELECT * FROM users WHERE email='$email' and password='$password'";
+   $sql="SELECT * FROM credentials_tb WHERE username='$username' and password='$password'";
    $result=$conn->query($sql);
    if($result->num_rows>0){
     session_start();
     $row=$result->fetch_assoc();
-    $_SESSION['email']=$row['email'];
+    $_SESSION['username']=$row['username'];
     header("Location: homepage.php");
     exit();
    }
