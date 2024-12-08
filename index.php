@@ -19,17 +19,14 @@ if(isset($_GET['error']) && $_GET['error'] == 1) {
         <form method="post" action="register.php">
           <div class="input-group">
               <i class="fas fa-envelope"></i>
-              <input type="email" name="email" id="email" placeholder="Email" required>
-              <label for="email">Email</label>
+              <input type="text" name="username" id="username" placeholder="Username" required>
+              <label for="username">Username</label>
           </div>
           <div class="input-group">
               <i class="fas fa-lock"></i>
               <input type="password" name="password" id="password" placeholder="Password" required>
               <label for="password">Password</label>
           </div>
-          <p class="recover">
-            <a href="#">Recover Password</a>
-          </p>
          <input type="submit" class="btn" value="Sign In" name="signIn">
         </form>
     </div>
