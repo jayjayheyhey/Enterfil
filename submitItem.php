@@ -2,6 +2,21 @@
 
 include 'connect.php';
 
+$validFilterCodes = [
+    "PTTVSPE", "PTTVPFE", "PSG-334/2", "DD120", "PD120",
+    "4042010104", "4042010080", "G04260", "53214057", "53100002",
+    "PARKER 9378590", "LG4-904-NH", "D-PPPB-2-A", "680-0600-A000", "FILT-EINS 3 PN:10.07.01.00060"
+];
+
+if (!in_array($FilterCode, $validFilterCodes)) {
+    echo '<script>
+            alert("ERROR: Invalid Filter Code.");
+            window.location.href = "addInterface.php";
+          </script>';
+    exit();
+}
+
+
 if(isset($_POST['submitButton'])){
     $FilterCode=$_POST['fCode'];
     $FilterName=$_POST['fName'];
