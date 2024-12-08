@@ -6,6 +6,16 @@ include("filters_table.php");
 if (isset($_GET['error']) && $_GET['error'] == 1) {
     echo '<script>alert("FILTER NOT FOUND");</script>';
 }
+
+// Fetch Filter Codes from the database
+$filterCodes = [];
+$query = "SELECT DISTINCT FilterCode FROM filters";
+$result = $conn->query($query);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $filterCodes[] = $row['FilterCode'];
+    }
+}
 ?>  
 
 <!DOCTYPE html>
@@ -22,21 +32,26 @@ if (isset($_GET['error']) && $_GET['error'] == 1) {
     <div class="ShowTableContainer" id="searchInterface" style="display:block;">
         <h1 class="form-title">Search Filter Code</h1>
         <form method="post" action="searchFilter.php">
-          <div class="input-group">
-             <i class="fas fa-lock"></i>
-             <input type="text" name="fCode" id="fCode" placeholder="Filter Code" required>
-             <label for="fCode">Filter Code</label>
-          </div>
-         <input type="submit" class="btn" value="Search" name="searchButton">
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input list="filterCodes" name="fCode" id="fCode" placeholder="Filter Code" required>
+                <datalist id="filterCodes">
+                    <?php foreach ($filterCodes as $code): ?>
+                        <option value="<?php echo htmlspecialchars($code); ?>">
+                    <?php endforeach; ?>
+                </datalist>
+                <label for="fCode">Filter Code</label>
+            </div>
+            <input type="submit" class="btn" value="Search" name="searchButton">
         </form>
         <form method="post" action="homepage.php">
             <input type="submit" class="btn" value="Back to Dashboard">
         </form>
 
-        <!--Display Filters Table-->
+        <!-- Display Filters Table -->
         <?php
          renderFiltersTable($conn);
-         ?>
-      </div>
-    </form>
+        ?>
+    </div>
 </body>
+</html>
