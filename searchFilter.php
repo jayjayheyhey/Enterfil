@@ -4,21 +4,26 @@ include 'connect.php';
 if(isset($_POST['searchButton'])){
     $FilterCode = $_POST['fCode'];
 
-    $checkCode="SELECT * FROM filters WHERE FilterCode='$FilterCode'";
-    $result = $conn->query($checkCode);
-    if($result->num_rows > 0){
+    $query = "SELECT * FROM filters WHERE FilterCode = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("s", $FilterCode);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-    }
-    else{
+    } else {
         header("Location: searchFilterInterface.php?error=1");
         exit;
     }
+    $stmt->close();
+
 }
 
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en">    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
