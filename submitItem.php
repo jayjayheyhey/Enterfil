@@ -25,32 +25,38 @@ if(isset($_POST['submitButton'])){
      $checkCode3="SELECT * From filters where PartNumber='$PartNumber'";
      $result=$conn->query($checkCode);
      if ($result->num_rows > 0) {
-        header("Location: addInterface.php?code=used");
+        header("Location: addInterface.php?add=code");
         exit();
     } else {
         $result = $conn->query($checkCode2);
         if ($result->num_rows > 0) {
-            header("Location: addInterface.php?name=used");
+            header("Location: addInterface.php?add=name");
             exit();
         } else {
             $result = $conn->query($checkCode3);
             if ($result->num_rows > 0) {
-                header("Location: addInterface.php?part=used");
+                header("Location: addInterface.php?add=part");
                 exit();
             } else {
                 if ($Quantity > $MaxStock) {
-                    header("Location: addInterface.php?stock=toolarge");
+                    header("Location: addInterface.php?add=toolarge");
                     exit();
                 } else if ($Quantity < 0 || $Quantity >= 10000 ) {
-                    header("Location: addInterface.php?stock=toolow");
+                    header("Location: addInterface.php?add=toolow");
                     exit();
                 } elseif ($MaxStock < 5 || $MaxStock >= 10000 ) {
-                    header("Location: addInterface.php?maxStock=toolow");
+                    header("Location: addInterface.php?add=maxStock");
                     exit();
                 } elseif ($LowStockSignal < 0 || $LowStockSignal >= 10000 ) {
-                    header("Location: addInterface.php?signal=toolow");
+                    header("Location: addInterface.php?add=lowStock");
                     exit();
-                } else {
+                } elseif ($Length < 0 || $Length >= 10000) {
+                    $errorMessage = "Invalid Length amount.";
+                } elseif ($Width < 0 || $Width >= 10000) {
+                    $errorMessage = "Invalid Width amount.";
+                } elseif ($Height < 0 || $Height >= 10000) {
+                    $errorMessage = "Invalid Height amount.";
+                }else {
                     $insertQuery = "INSERT INTO filters (FilterCode, PartNumber, FilterName, Length, LengthUnit, Width, WidthUnit, Height, HeightUnit, Quantity, MaxStock, LowStockSignal)
                             VALUES ('$FilterCode', '$PartNumber', '$FilterName', '$Length', '$LengthUnit', '$Width', '$WidthUnit', '$Height', '$HeightUnit', '$Quantity', '$MaxStock', '$LowStockSignal')";
                     if ($conn->query($insertQuery) == TRUE) {
