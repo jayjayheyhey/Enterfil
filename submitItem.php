@@ -2,15 +2,6 @@
 
 include 'connect.php';
 
-if (!in_array($FilterCode, $validFilterCodes)) {
-    echo '<script>
-            alert("ERROR: Invalid Filter Code.");
-            window.location.href = "addInterface.php";
-          </script>';
-    exit();
-}
-
-
 if(isset($_POST['submitButton'])){
     $FilterCode=$_POST['fCode'];
     $PartNumber=$_POST['pName'];

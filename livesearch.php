@@ -18,7 +18,8 @@ if (isset($_POST['input'])) {
 <table>
     <thead>
         <tr>
-            <th>Filter Code</th>
+            <th>OEM Code</th>
+            <th>Part Number</th>
             <th>Filter Name</th>
             <th>Materials</th>
             <th>Quantity</th>
@@ -41,6 +42,7 @@ if (isset($_POST['input'])) {
 
                 echo "<tr>";
                 echo "<td>" . htmlspecialchars($row['FilterCode'] ?? 'N/A') . "</td>";
+                echo "<td>" . htmlspecialchars($row['PartNumber'] ?? 'N/A') . "</td>";
                 echo "<td>" . htmlspecialchars($row['FilterName'] ?? 'N/A') . "</td>";
                 echo "<td>" . htmlspecialchars($row['Materials'] ?? 'N/A') . "</td>";
                 echo "<td class='$quantityClass'>" . htmlspecialchars($row['Quantity'] ?? 'N/A') . "</td>";

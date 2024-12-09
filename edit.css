@@ -1,0 +1,33 @@
+input:focus{
+    border-bottom:2px solid rgb(125, 125, 235) !important;
+}
+
+input:focus~label,input:not(:placeholder-shown)~label{
+    color:hsl(0, 0%, 0%) !important;
+}
+
+textarea:focus {
+    border: 2px solid rgb(125, 125, 235) ;
+}
+
+
+textarea:focus~label,textarea:not(:placeholder-shown)~label {
+    color: hsl(0, 0%, 0%);
+}
+
+/* Ensure label for textarea is always positioned on top */
+textarea + label {
+    top: -6em; /* Move the label above the textarea */
+    color:hsl(0, 0%, 0%);
+    font-size: 15px;
+    transition: 0.3s ease all; /* Smooth transition */
+    position: relative;
+}
+
+/* For compatibility, make sure textareas behave like inputs when focused */
+textarea:focus + label,
+textarea:not(:placeholder-shown) + label {
+    top: -8em; 
+    color:hsl(0, 0%, 0%); /* Or a custom color */
+}
+

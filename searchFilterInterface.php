@@ -31,7 +31,7 @@ if ($result->num_rows > 0) {
 <body>
     <div class="ShowTableContainer" id="searchInterface" style="display:block;">
         <h1 class="form-title">Search Filter Code</h1>
-        <form method="post" action="searchFilter.php">
+        <form method="post" action="editFilter.php">
             <div class="input-group">
                 <i class="fas fa-lock"></i>
                 <input list="filterCodes" name="fCode" id="fCode" placeholder="Filter Code" required>

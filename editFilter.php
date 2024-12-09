@@ -29,6 +29,7 @@ if(isset($_POST['searchButton'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="edit.css">
     <title>Edit Filter</title>
 </head>
 <body>
@@ -38,12 +39,12 @@ if(isset($_POST['searchButton'])){
 if(isset($row) && !empty($row)) { 
 ?>
     <div class="container" id="editInterface" style="display:block;">
-        <h1 class="form-title">Edit Filter</h1>
+        <h1 class="form-title">UPDATE Filter</h1>
         <form method="post" action="updateFilter.php">
           <div class="input-group">
              <i class="fas fa-lock"></i>
              <input type="text" name="fCode" id="fCode" placeholder="Filter Code" required value="<?php echo isset($row['FilterCode']) ? $row['FilterCode'] : ''; ?>" disabled>
-             <label for="fCode">You have selected filter:</label>
+             <label for="fCode">Filter Code:</label>
           </div>
           
             <!-- Hidden field to submit the FilterCode -->
@@ -51,32 +52,32 @@ if(isset($row) && !empty($row)) {
 
             <div class="input-group">
               <i class="fas fa-book"></i>
-              <input type="text" name="pName" id="pName" placeholder="Update Part Number" required value="<?php echo isset($row['PartNumber']) ? $row['PartNumber'] : ''; ?>">
-              <label for="pName">Update Part Number</label>
+              <input type="text" name="pName" id="pName" placeholder="Part Number" required value="<?php echo isset($row['PartNumber']) ? $row['PartNumber'] : ''; ?>">
+              <label for="pName">Part Number:</label>
             </div>
             <div class="input-group">
               <i class="fas fa-book"></i>
               <input type="text" name="fName" id="fName" placeholder="Filter Name" required value="<?php echo isset($row['FilterName']) ? $row['FilterName'] : ''; ?>">
-              <label for="fName">UDPATE: Filter Name</label>
+              <label for="fName">Filter Name:</label>
           </div>
           <div class="input-group">
               <textarea id="materials" name="materials" placeholder="Materials" rows="4" cols="49"><?php echo isset($row['Materials']) ? $row['Materials'] : ''; ?></textarea>
-              <label for="materials">UPDATE: Materials</label>
+              <label for="materials">Materials</label>
           </div>
           <div class="input-group">
               <i class="fas fa-cog"></i>
               <input type="number" name="quantity" id="quantity" placeholder="Quantity" required value="<?php echo isset($row['Quantity']) ? $row['Quantity'] : ''; ?>">
-              <label for="password">UPDATE: Quantity</label>
+              <label for="password">Quantity</label>
           </div>
           <div class="input-group">
               <i class="fas fa-clipboard"></i>
               <input type="number" name="maxStock" id="maxStock" placeholder="Maximum Stock Level" required value="<?php echo isset($row['MaxStock']) ? $row['MaxStock'] : ''; ?>">
-              <label for="password">UPDATE: Maximum Stock Level</label>
+              <label for="password">Maximum Stock Level</label>
           </div>
           <div class="input-group">
               <i class="fas fa-clipboard"></i>
               <input type="number" name="lowStock" id="lowStock" placeholder="Low Stock Signal" required value="<?php echo isset($row['LowStockSignal']) ? $row['LowStockSignal'] : ''; ?>">
-              <label for="password">UPDATE: Low Stock Signal</label>
+              <label for="password">Low Stock Signal</label>
           </div>
          <input type="submit" class="btn" value="Update Filter" name="updateButton">
         </form>
