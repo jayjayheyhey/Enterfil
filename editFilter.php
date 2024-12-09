@@ -84,7 +84,6 @@ if(isset($_POST['searchButton'])){
         $row = $result->fetch_assoc();
         $PartNumber = $row['PartNumber'];
         $FilterName = $row['FilterName'];
-        $Materials = $row['Materials'];
         $Quantity = $row['Quantity'];
         $MaxStock = $row['MaxStock'];
         $LowStockSignal = $row['LowStockSignal'];

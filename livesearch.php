@@ -21,7 +21,7 @@ if (isset($_POST['input'])) {
             <th>OEM Code</th>
             <th>Part Number</th>
             <th>Filter Name</th>
-            <th>Materials</th>
+            <th>Dimensions</th>
             <th>Quantity</th>
             <th>Max Stock</th>
             <th>Low Stock Signal</th>
@@ -40,11 +40,15 @@ if (isset($_POST['input'])) {
                     $quantityClass = 'quantity-medium';
                 }
 
+                $dimensions = "{$row['Length']}{$row['LengthUnit']} x
+                                {$row['Width']}{$row['WidthUnit']} x
+                                {$row['Height']}{$row['HeightUnit']}";
+                
                 echo "<tr>";
                 echo "<td>" . htmlspecialchars($row['FilterCode'] ?? 'N/A') . "</td>";
                 echo "<td>" . htmlspecialchars($row['PartNumber'] ?? 'N/A') . "</td>";
                 echo "<td>" . htmlspecialchars($row['FilterName'] ?? 'N/A') . "</td>";
-                echo "<td>" . htmlspecialchars($row['Materials'] ?? 'N/A') . "</td>";
+                echo "<td>" . htmlspecialchars($dimensions) . "</td>";  
                 echo "<td class='$quantityClass'>" . htmlspecialchars($row['Quantity'] ?? 'N/A') . "</td>";
                 echo "<td>" . htmlspecialchars($row['MaxStock'] ?? 'N/A') . "</td>";
                 echo "<td>" . htmlspecialchars($row['LowStockSignal'] ?? 'N/A') . "</td>";
