@@ -10,6 +10,16 @@ if(isset($_GET['error']) && $_GET['error'] == 1) {
     echo '<script>alert("ERROR: The resulting quantity cannot exceed the maximum stock.");</script>';
 } 
 
+// Fetch available FilterCodes for the dropdown
+$filterCodes = [];
+$query = "SELECT DISTINCT FilterCode FROM filters";
+$result = $conn->query($query);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $filterCodes[] = $row['FilterCode'];
+    }
+}
+
 // Initialize variables
 $FilterCode = '';
 $currentQuantity = 0;
@@ -89,9 +99,14 @@ if (isset($_POST['submitQuantityButton'])) {
         <h1 class="form-title">Edit Quantity</h1>
         <form method="get" action="changeQuantity.php">
             <div class="input-group">
-                <i class="fas fa-clipboard"></i>
-                <input type="text" name="FilterCode" id="FilterCode" placeholder="Filter Code" required>
-                <label for="FilterCode">Filter Code</label>
+                <i class="fas fa-lock"></i>
+                <input list="filterCodes" name="fCode" id="fCode" placeholder="Filter Code" required>
+                <datalist id="filterCodes">
+                    <?php foreach ($filterCodes as $code): ?>
+                        <option value="<?php echo htmlspecialchars($code); ?>">
+                    <?php endforeach; ?>
+                </datalist>
+                <label for="fCode">Filter Code</label>
             </div>
             <input type="submit" class="btn" value="Submit Filter Code" name="submitFilterCode">
         </form>
