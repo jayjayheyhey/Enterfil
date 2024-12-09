@@ -3,6 +3,7 @@ include 'connect.php';
 
 if(isset($_POST['updateButton'])){
     $FilterCode = $_POST['fCode'];
+    $PartNumber = $_POST['pName'];
     $FilterName = $_POST['fName'];
     $Materials = $_POST['materials'];
     $Quantity = $_POST['quantity'];
@@ -22,6 +23,7 @@ if(isset($_POST['updateButton'])){
     }else {
         $updateQuery = "UPDATE filters 
                         SET FilterName = '$FilterName', 
+                            PartNumber = '$PartNumber', 
                             Materials = '$Materials', 
                             Quantity = '$Quantity', 
                             MaxStock = '$MaxStock', 
