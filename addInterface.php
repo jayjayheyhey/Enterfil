@@ -53,7 +53,13 @@ if (isset($_POST['submitButton'])) {
         $errorMessage = "Maximum Stock must be at least 5.";
     } elseif ($LowStockSignal < 0) {
         $errorMessage = "Low Stock Signal cannot be negative.";
-    } else {
+    } elseif ($Length < 0 || $Length >= 10000) {
+            $errorMessage = "Invalid Length amount.";
+        } elseif ($Width < 0 || $Width >= 10000) {
+            $errorMessage = "Invalid Width amount.";
+        } elseif ($Height < 0 || $Height >= 10000) {
+            $errorMessage = "Invalid Height amount.";
+        }else {
         // Insert the new filter if validation passes
         $insertQuery = "INSERT INTO filters (FilterCode, PartNumber, FilterName, Length, LengthUnit, Width, WidthUnit, Height, HeightUnit, Quantity, MaxStock, LowStockSignal)
                         VALUES ('$FilterCode', '$PartNumber', '$FilterName', '$Length', '$LengthUnit', '$Width', '$WidthUnit', '$Height', '$HeightUnit', '$Quantity', '$MaxStock', '$LowStockSignal')";
