@@ -5,48 +5,56 @@ include("filters_table.php");
 
 $message = ""; // Initialize the message variable
 $FilterCode = ""; // Initialize FilterCode variable
+$FilterName = ""; // To hold the name of the filter being removed
 $confirmation = false; // To track whether the confirmation step should be shown
 
 // Fetch Filter Codes from the database
 $filterCodes = [];
 $query = "SELECT DISTINCT FilterCode FROM filters";
 $result = $conn->query($query);
-if ($result->num_rows > 0) {
+if ($result) {
     while ($row = $result->fetch_assoc()) {
         $filterCodes[] = $row['FilterCode'];
     }
+} else {
+    $message = "Error fetching filter codes: " . htmlspecialchars($conn->error);
 }
 
 // Handle the form submission
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (isset($_POST['FilterCode'])) {
+    if (isset($_POST['FilterCode']) && !empty($_POST['FilterCode'])) {
         // Sanitize user input
         $FilterCode = $conn->real_escape_string($_POST['FilterCode']);
 
         // Check if the filter exists in the database
-        $check_sql = "SELECT * FROM filters WHERE FilterCode = '$FilterCode'";
-        $check_result = $conn->query($check_sql);
+        $stmt = $conn->prepare("SELECT FilterName FROM filters WHERE FilterCode = ?");
+        $stmt->bind_param("s", $FilterCode);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-        if ($check_result->num_rows > 0) {
-            $row = $check_result->fetch_assoc();
-            $FilterName = $row['FilterName']; 
-            // If filter exists, proceed to confirmation
-            if (isset($_POST['confirmDelete']) && $_POST['confirmDelete'] == 'Yes') {
-                // Perform the delete action after confirmation
-                $sql = "DELETE FROM filters WHERE FilterCode = '$FilterCode'";
-                if ($conn->query($sql) === TRUE) {
-                    $message = "Data removed successfully";
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $FilterName = $row['FilterName'];
+
+            // If confirmation is provided, delete the filter
+            if (isset($_POST['confirmDelete']) && $_POST['confirmDelete'] === 'Yes') {
+                $stmt = $conn->prepare("DELETE FROM filters WHERE FilterCode = ?");
+                $stmt->bind_param("s", $FilterCode);
+
+                if ($stmt->execute()) {
+                    $message = "Filter successfully removed.";
                 } else {
-                    $message = "Error deleting filter: " . $conn->error;
+                    $message = "Error deleting filter: " . htmlspecialchars($conn->error);
                 }
             } else {
-                // Show confirmation message if not already confirmed
+                // Trigger confirmation step
                 $confirmation = true;
             }
         } else {
-            // If filter does not exist, show error message
-            echo '<script>alert("FILTER NOT FOUND");</script>';
+            $message = "Filter not found.";
         }
+    } else {
+        $message = "Filter Code is required.";
     }
 }
 ?>
@@ -67,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         
         <!-- Display success/error message -->
         <?php if (!empty($message)) { ?>
-            <p class="error-message"><?php echo $message; ?></p>
+            <p class="error-message"><?php echo htmlspecialchars($message); ?></p>
         <?php } ?>
         
         <!-- Show the confirmation form after FilterCode input -->
@@ -79,41 +87,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <input type="hidden" name="FilterCode" value="<?php echo htmlspecialchars($FilterCode); ?>">
                 <input type="submit" class="btn" value="Yes" name="confirmDelete">
             </form>
-            <form method="post" action="homepage.php">
-                <input type="hidden" name="FilterCode" value="<?php echo htmlspecialchars($FilterCode); ?>">
-                <button type="submit" class="btn">No</button>
+            <form method="get" action="removeItem.php">
+                <button type="submit" class="btn">Cancel</button>
             </form>
         <?php } else { ?>
             <!-- Form for entering the FilterCode -->
             <form method="post" action="">
                 <div class="input-group">
                     <i class="fas fa-lock"></i>
-                    <input list="filterCodes" name="fCode" id="fCode" placeholder="Filter Code" required>
+                    <input list="filterCodes" name="FilterCode" id="FilterCode" placeholder="Filter Code" required>
                     <datalist id="filterCodes">
                         <?php foreach ($filterCodes as $code): ?>
                             <option value="<?php echo htmlspecialchars($code); ?>">
                         <?php endforeach; ?>
                     </datalist>
-                    <label for="fCode">Filter Code</label>
+                    <label for="FilterCode">Filter Code</label>
                 </div>
                 <input type="submit" class="btn" value="Delete Filter">
             </form>
         <?php } ?>
+        
+        <!-- Back to dashboard button -->
         <form method="post" action="homepage.php">
             <input type="submit" class="btn" value="Back to Dashboard">
         </form>
 
-        <!--Display Filters Table-->
-        <?php
-         renderFiltersTable($conn);
-         ?>
-
-        <!-- Return to homepage button if filter is not found -->
-        <?php if ($message === "Filter not found") { ?>
-            <form method="get" action="homepage.php">
-                <button type="submit" class="btn">Return to Homepage</button>
-            </form>
-        <?php } ?>
+        <!-- Display Filters Table -->
+        <?php renderFiltersTable($conn); ?>
     </div>
 </body>
 </html>
