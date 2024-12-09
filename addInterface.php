@@ -31,9 +31,43 @@ include("connect.php");
               <input type="text" name="fName" id="fName" placeholder="Filter Name" required>
               <label for="fName">Filter Name</label>
           </div>
+          <!-- Input Length -->
           <div class="input-group">
-              <textarea id="materials" name="materials" placeholder="Materials" rows="4" cols="49"></textarea>
-              <label for="materials">Materials</label>
+              <i class="fas fa-ruler"></i>
+              <input type="number" name="length" id="length" placeholder="Length" required step="0.01">
+              <label for="length">Length</label>
+              <select name="lengthUnit" id="lengthUnit" required>
+                  <option value="cm">cm</option>
+                  <option value="in">in</option>
+                  <option value="mm">mm</option>
+                  <option value="ft">ft</option>
+              </select>
+          </div>
+
+          <!-- Input Width -->
+          <div class="input-group">
+              <i class="fas fa-ruler-horizontal"></i>
+              <input type="number" name="width" id="width" placeholder="Width" required step="0.01">
+              <label for="width">Width</label>
+              <select name="widthUnit" id="widthUnit" required>
+                  <option value="cm">cm</option>
+                  <option value="in">in</option>
+                  <option value="mm">mm</option>
+                  <option value="ft">ft</option>
+              </select>
+          </div>
+
+          <!-- Input Height -->
+          <div class="input-group">
+              <i class="fas fa-ruler-vertical"></i>
+              <input type="number" name="height" id="height" placeholder="Height" required step="0.01">
+              <label for="height">Height</label>
+              <select name="heightUnit" id="heightUnit" required>
+                  <option value="cm">cm</option>
+                  <option value="in">in</option>
+                  <option value="mm">mm</option>
+                  <option value="ft">ft</option>
+              </select>
           </div>
           <div class="input-group">
               <i class="fas fa-cog"></i>

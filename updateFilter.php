@@ -5,10 +5,19 @@ if(isset($_POST['updateButton'])){
     $FilterCode = $_POST['fCode'];
     $PartNumber = $_POST['pName'];
     $FilterName = $_POST['fName'];
-    $Materials = $_POST['materials'];
     $Quantity = $_POST['quantity'];
     $MaxStock = $_POST['maxStock'];
     $LowStockSignal = $_POST['lowStock'];
+
+    $Length = $_POST['length'];
+    $LengthUnit = $_POST['lengthUnit'];
+
+    $Width = $_POST['width'];
+    $WidthUnit = $_POST['widthUnit'];
+
+    $Height = $_POST['height'];
+    $HeightUnit = $_POST['heightUnit'];
+
 
     if ($Quantity > $MaxStock) {
         echo '<script>
@@ -24,7 +33,12 @@ if(isset($_POST['updateButton'])){
         $updateQuery = "UPDATE filters 
                         SET FilterName = '$FilterName', 
                             PartNumber = '$PartNumber', 
-                            Materials = '$Materials', 
+                            Length = '$Length',
+                            LengthUnit = '$LengthUnit',
+                            Width = '$Width',
+                            WidthUnit = '$WidthUnit',
+                            Height = '$Height', 
+                            HeightUnit = '$HeightUnit', 
                             Quantity = '$Quantity', 
                             MaxStock = '$MaxStock', 
                             LowStockSignal = '$LowStockSignal'
