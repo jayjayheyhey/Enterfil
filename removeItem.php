@@ -7,6 +7,16 @@ $message = ""; // Initialize the message variable
 $FilterCode = ""; // Initialize FilterCode variable
 $confirmation = false; // To track whether the confirmation step should be shown
 
+// Fetch Filter Codes from the database
+$filterCodes = [];
+$query = "SELECT DISTINCT FilterCode FROM filters";
+$result = $conn->query($query);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $filterCodes[] = $row['FilterCode'];
+    }
+}
+
 // Handle the form submission
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['FilterCode'])) {
@@ -76,8 +86,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <?php } else { ?>
             <!-- Form for entering the FilterCode -->
             <form method="post" action="">
-                <input type="text" name="FilterCode" id="FilterCode" placeholder="Filter Code" required>
-                <label for="FilterCode">Filter Code</label>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input list="filterCodes" name="fCode" id="fCode" placeholder="Filter Code" required>
+                    <datalist id="filterCodes">
+                        <?php foreach ($filterCodes as $code): ?>
+                            <option value="<?php echo htmlspecialchars($code); ?>">
+                        <?php endforeach; ?>
+                    </datalist>
+                    <label for="fCode">Filter Code</label>
+                </div>
                 <input type="submit" class="btn" value="Delete Filter">
             </form>
         <?php } ?>
