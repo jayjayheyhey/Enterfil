@@ -1,6 +1,27 @@
 <?php
 session_start();
 include("connect.php");
+
+$fullURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$errorMessage = "";
+
+if (strpos($fullURL, "code=used") !== false) { 
+    $errorMessage = "Filter code already exists.";
+} else if (strpos($fullURL, "name=used") !== false) {
+    $errorMessage = "Filter name already exists.";
+} else if (strpos($fullURL, "part=used") !== false) {
+    $errorMessage = "Part number already exists.";
+} else if (strpos($fullURL, "stock=toolarge") !== false) {
+    $errorMessage = "Quantity cannot be larger than the maximum stock.";
+} else if (strpos($fullURL, "stock=toolow") !== false) {
+    $errorMessage = "Insufficient amount for Quantity.";
+} else if (strpos($fullURL, "maxStock=toolow") !== false) {
+    $errorMessage = "Insufficient amount for Maximum Stock Level.";
+} else if (strpos($fullURL, "signal=toolow") !== false) {
+    $errorMessage = "Insufficient amount for Low Stock Signal.";
+} else if (strpos($fullURL, "add=Success") !== false) {
+    $errorMessage = "<span id='success'>Filter successfully added!</span>";
+}
 ?>  
 
 <!DOCTYPE html>
@@ -10,11 +31,16 @@ include("connect.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style2.css">
     <title>AddItem</title>
 </head>
 <body>
     <div class="container" id="addInterface" style="display:block;">
         <h1 class="form-title">Add Item</h1>
+        <?php if (!empty($errorMessage)): ?>
+            <p class="popup"><?php echo $errorMessage; ?></p>
+        <?php endif; ?>
+
         <form method="post" action="submitItem.php">
           <div class="input-group">
              <i class="fas fa-lock"></i>

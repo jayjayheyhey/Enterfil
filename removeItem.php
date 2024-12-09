@@ -3,7 +3,16 @@ session_start();
 include("connect.php"); // Include database connection
 include("filters_table.php");
 
-$message = ""; // Initialize the message variable
+$fullURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$errorMessage = "";
+
+if (strpos($fullURL, "code=removed") !== false) { 
+    $errorMessage = "Filter successfully removed.";
+} else if (strpos($fullURL, "code=NULL") !== false) { 
+    $errorMessage = "Filter code not found.";
+}
+
+
 $FilterCode = ""; // Initialize FilterCode variable
 $FilterName = ""; // To hold the name of the filter being removed
 $confirmation = false; // To track whether the confirmation step should be shown
@@ -42,7 +51,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $stmt->bind_param("s", $FilterCode);
 
                 if ($stmt->execute()) {
-                    $message = "Filter successfully removed.";
+                    header("Location: removeItem.php?code=removed");
+                    exit();
                 } else {
                     $message = "Error deleting filter: " . htmlspecialchars($conn->error);
                 }
@@ -51,10 +61,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $confirmation = true;
             }
         } else {
-            $message = "Filter not found.";
+            header("Location: removeItem.php?code=NULL");
+            exit();
         }
-    } else {
-        $message = "Filter Code is required.";
     }
 }
 ?>
@@ -66,6 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style2.css">
     <link rel="stylesheet" href="tablestyle.css">
     <title>Remove Filter</title>
 </head>
@@ -74,13 +84,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <h1 class="form-title">Remove Filter</h1>
         
         <!-- Display success/error message -->
-        <?php if (!empty($message)) { ?>
-            <p class="error-message"><?php echo htmlspecialchars($message); ?></p>
-        <?php } ?>
+        <?php if (!empty($errorMessage)): ?>
+            <p class="popup"><?php echo $errorMessage; ?></p>
+        <?php endif; ?>
         
         <!-- Show the confirmation form after FilterCode input -->
         <?php if ($confirmation) { ?>
-            <p>Are you sure you want to delete this filter?</p>
+            <p style="color: hsl(327,90%,28%);">Are you sure you want to delete this filter?</p>
             <p><strong>Filter Code:</strong> <?php echo htmlspecialchars($FilterCode); ?></p>
             <p><strong>Filter Name:</strong> <?php echo htmlspecialchars($FilterName); ?></p>
             <form method="post" action="">
@@ -92,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </form>
         <?php } else { ?>
             <!-- Form for entering the FilterCode -->
-            <form method="post" action="">
+            <form method="post" action="removeItem.php">
                 <div class="input-group">
                     <i class="fas fa-lock"></i>
                     <input list="filterCodes" name="FilterCode" id="FilterCode" placeholder="Filter Code" required>

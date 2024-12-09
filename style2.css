@@ -15,6 +15,19 @@ textarea:focus~label,textarea:not(:placeholder-shown)~label {
     color: hsl(0, 0%, 0%);
 }
 
+.popup {
+    display: flex;
+    justify-content: center;
+    color: hsl(327,90%,28%);
+    margin-bottom: 2rem;
+    z-index: 999;
+}
+
+#success{
+    color: hsl(121, 94%, 42%);
+
+}
+
 /* Ensure label for textarea is always positioned on top */
 textarea + label {
     top: -6em; /* Move the label above the textarea */
@@ -30,4 +43,3 @@ textarea:not(:placeholder-shown) + label {
     top: -8em; 
     color:hsl(0, 0%, 0%); /* Or a custom color */
 }
-

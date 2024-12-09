@@ -3,9 +3,17 @@ session_start();
 include("connect.php");
 include("filters_table.php");
 
-if (isset($_GET['error']) && $_GET['error'] == 1) {
-    echo '<script>alert("FILTER NOT FOUND");</script>';
+$fullURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$errorMessage = "";
+
+if (strpos($fullURL, "code=0") !== false) { 
+    $errorMessage = "Filter code not found.";
+} else if (strpos($fullURL, "FilterCode=EXF001&submitFilterCode=Submit+Filter+Code?stock=anomaly") !== false) { 
+    $errorMessage = "Insufficient amount for quantity.";
+}else if (strpos($fullURL, "add=Success") !== false) {
+    $errorMessage = "<span id='success'>Filter successfully added!</span>";
 }
+
 
 // Fetch Filter Codes from the database
 $filterCodes = [];
@@ -25,12 +33,16 @@ if ($result->num_rows > 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style2.css">
     <link rel="stylesheet" href="tablestyle.css">
     <title>Search Filter</title>
 </head>
 <body>
     <div class="ShowTableContainer" id="searchInterface" style="display:block;">
-        <h1 class="form-title">Search Filter Code</h1>
+        <h1 class="form-title">Edit Filter</h1>
+        <?php if (!empty($errorMessage)): ?>
+            <p class="popup"><?php echo $errorMessage; ?></p>
+        <?php endif; ?>
         <form method="post" action="editFilter.php">
             <div class="input-group">
                 <i class="fas fa-lock"></i>

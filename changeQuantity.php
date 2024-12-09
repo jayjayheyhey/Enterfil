@@ -3,13 +3,15 @@ session_start();
 include('connect.php');
 include("filters_table.php");
 
-// Display error messages based on query parameters
-if (isset($_GET['error'])) {
-    if ($_GET['error'] == 1) {
-        echo '<script>alert("ERROR: The resulting quantity cannot be less than 0.");</script>';
-    } else if ($_GET['error'] == 2) {
-        echo '<script>alert("ERROR: The resulting quantity cannot exceed the maximum stock.");</script>';
-    }
+$fullURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$errorMessage = "";
+
+if (strpos($fullURL, "code=0") !== false) { 
+    $errorMessage = "Filter code not found.";
+} else if (strpos($fullURL, "FilterCode=EXF001&submitFilterCode=Submit+Filter+Code?stock=anomaly") !== false) { 
+    $errorMessage = "Insufficient amount for quantity.";
+} else if (strpos($fullURL, "add=Success") !== false) {
+    $errorMessage = "<span id='success'>Filter successfully updated!</span>";
 }
 
 // Fetch available FilterCodes for the dropdown
@@ -44,8 +46,8 @@ if (isset($_GET['FilterCode']) && !empty($_GET['FilterCode'])) {
         $currentQuantity = $row['Quantity'];
         $maxStock = $row['MaxStock'];
     } else {
-        echo '<script>alert("Error: Filter Code not found.");</script>';
-        $FilterCode = '';
+        header("Location: changeQuantity.php?code=0");
+        exit();
     }
 }
 
@@ -65,12 +67,8 @@ if (isset($_POST['submitQuantityButton'])) {
     $newQuantity = $currentQuantity + $quantityChangeAdd - $quantityChangeSubtract;
 
     // Validate the new quantity
-    if ($newQuantity < 0) {
-        header("Location: changeQuantity.php?FilterCode=" . urlencode($FilterCode) . "&error=1");
-        exit();
-    }
-    if ($newQuantity > $maxStock) {
-        header("Location: changeQuantity.php?FilterCode=" . urlencode($FilterCode) . "&error=2");
+    if ($newQuantity < 0 || $newQuantity >= 10000) {
+        header("Location: changeQuantity.php?FilterCode=EXF001&submitFilterCode=Submit+Filter+Code?stock=anomaly");
         exit();
     }
 
@@ -95,6 +93,7 @@ if (isset($_POST['submitQuantityButton'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Change Quantity</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style2.css">
     <link rel="stylesheet" href="tablestyle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
@@ -102,6 +101,9 @@ if (isset($_POST['submitQuantityButton'])) {
     <!-- Section to select FilterCode -->
     <div class="ShowTableContainer" id="enterFilterCode" style="<?php echo empty($FilterCode) ? 'display:block;' : 'display:none;'; ?>">
         <h1 class="form-title">Edit Quantity</h1>
+        <?php if (!empty($errorMessage)): ?>
+            <p class="popup"><?php echo $errorMessage; ?></p>
+        <?php endif; ?>
         <form method="get" action="changeQuantity.php">
             <div class="input-group">
                 <i class="fas fa-lock"></i>
@@ -124,6 +126,9 @@ if (isset($_POST['submitQuantityButton'])) {
     <!-- Section to update quantity -->
     <div class="container" id="updateQuantity" style="<?php echo !empty($FilterCode) ? 'display:block;' : 'display:none;'; ?>">
         <h1 class="form-title">Change Quantity</h1>
+        <?php if (!empty($errorMessage)): ?>
+            <p class="popup"><?php echo $errorMessage; ?></p>
+        <?php endif; ?>
         <p><strong>Code:</strong> <?php echo htmlspecialchars($FilterCode); ?></p>
         <p><strong>Current Quantity:</strong> <?php echo htmlspecialchars($currentQuantity); ?></p>
         <p><strong>Max Stock:</strong> <?php echo htmlspecialchars($maxStock); ?></p><br>
@@ -141,6 +146,9 @@ if (isset($_POST['submitQuantityButton'])) {
                 <label for="quantitySubtract">Subtract Quantity</label>
             </div>
             <input type="submit" class="btn" value="Submit Quantity Change" name="submitQuantityButton">
+        </form>
+        <form method="post" action="homepage.php">
+                <input type="submit" class="btn" value="Back to Dashboard">
         </form>
     </div>
 </body>
