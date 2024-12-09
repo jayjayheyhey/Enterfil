@@ -10,6 +10,7 @@ include("connect.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="select.css">
     <title>AddItem</title>
 </head>
 <body>
@@ -31,44 +32,42 @@ include("connect.php");
               <input type="text" name="fName" id="fName" placeholder="Filter Name" required>
               <label for="fName">Filter Name</label>
           </div>
-          <!-- Input Length -->
           <div class="input-group">
-              <i class="fas fa-ruler"></i>
-              <input type="number" name="length" id="length" placeholder="Length" required step="0.01">
-              <label for="length">Length</label>
-              <select name="lengthUnit" id="lengthUnit" required>
-                  <option value="cm">cm</option>
-                  <option value="in">in</option>
-                  <option value="mm">mm</option>
-                  <option value="ft">ft</option>
-              </select>
-          </div>
+    <i class="fas fa-ruler"></i>
+    <input type="number" name="length" id="length" placeholder="Length" required step="0.01">
+    <label for="length">Length</label>
+    <select name="lengthUnit" id="lengthUnit" required>
+        <option value="cm">cm</option>
+        <option value="in">in</option>
+        <option value="mm">mm</option>
+        <option value="ft">ft</option>
+    </select>
+</div>
 
-          <!-- Input Width -->
-          <div class="input-group">
-              <i class="fas fa-ruler-horizontal"></i>
-              <input type="number" name="width" id="width" placeholder="Width" required step="0.01">
-              <label for="width">Width</label>
-              <select name="widthUnit" id="widthUnit" required>
-                  <option value="cm">cm</option>
-                  <option value="in">in</option>
-                  <option value="mm">mm</option>
-                  <option value="ft">ft</option>
-              </select>
-          </div>
+<div class="input-group">
+    <i class="fas fa-ruler"></i>
+    <input type="number" name="width" id="width" placeholder="Width" required step="0.01">
+    <label for="width">Width</label>
+    <select name="widthUnit" id="widthUnit" required>
+        <option value="cm">cm</option>
+        <option value="in">in</option>
+        <option value="mm">mm</option>
+        <option value="ft">ft</option>
+    </select>
+</div>
 
-          <!-- Input Height -->
-          <div class="input-group">
-              <i class="fas fa-ruler-vertical"></i>
-              <input type="number" name="height" id="height" placeholder="Height" required step="0.01">
-              <label for="height">Height</label>
-              <select name="heightUnit" id="heightUnit" required>
-                  <option value="cm">cm</option>
-                  <option value="in">in</option>
-                  <option value="mm">mm</option>
-                  <option value="ft">ft</option>
-              </select>
-          </div>
+<div class="input-group">
+    <i class="fas fa-ruler"></i>
+    <input type="number" name="height" id="height" placeholder="Height" required step="0.01">
+    <label for="height">Height</label>
+    <select name="heightUnit" id="heightUnit" required>
+        <option value="cm">cm</option>
+        <option value="in">in</option>
+        <option value="mm">mm</option>
+        <option value="ft">ft</option>
+    </select>
+</div>
+
           <div class="input-group">
               <i class="fas fa-cog"></i>
               <input type="number" name="quantity" id="quantity" placeholder="Quantity" required>

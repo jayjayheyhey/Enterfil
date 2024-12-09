@@ -30,6 +30,7 @@ if(isset($_POST['searchButton'])){
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="edit.css">
+    <link rel="stylesheet" href="select.css">
     <title>Edit Filter</title>
 </head>
 <body>

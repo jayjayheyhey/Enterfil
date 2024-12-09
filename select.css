@@ -1,0 +1,24 @@
+select {
+    width: 100%;
+    padding: 8px 1.5rem;
+    font-size: 15px;
+    color: inherit;
+    background-color: transparent;
+    border: 1px solid #757575;
+    border-radius: 15px;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 1.5em;
+    margin-top: -1em;
+}
+
+select:focus {
+    border-color: hsl(327, 90%, 28%);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+select option {
+    color: #000;
+    background-color: #fff;
+}
