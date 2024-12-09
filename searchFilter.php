@@ -49,7 +49,12 @@ if(isset($row) && !empty($row)) {
             <!-- Hidden field to submit the FilterCode -->
             <input type="hidden" name="fCode" value="<?php echo isset($row['FilterCode']) ? $row['FilterCode'] : ''; ?>">
 
-          <div class="input-group">
+            <div class="input-group">
+              <i class="fas fa-book"></i>
+              <input type="text" name="pName" id="pName" placeholder="Update Part Number" required value="<?php echo isset($row['PartNumber']) ? $row['PartNumber'] : ''; ?>">
+              <label for="pName">Update Part Number</label>
+            </div>
+            <div class="input-group">
               <i class="fas fa-book"></i>
               <input type="text" name="fName" id="fName" placeholder="Filter Name" required value="<?php echo isset($row['FilterName']) ? $row['FilterName'] : ''; ?>">
               <label for="fName">UDPATE: Filter Name</label>
