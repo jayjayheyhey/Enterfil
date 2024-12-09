@@ -3,16 +3,24 @@
 include 'connect.php';
 
 if(isset($_POST['submitButton'])){
-    $FilterCode=$_POST['fCode'];
-    $PartNumber=$_POST['pName'];
-    $FilterName=$_POST['fName'];
-    $Materials=$_POST['materials'];
-    $Quantity=$_POST['quantity'];
-    $MaxStock=$_POST['maxStock'];
-    $LowStockSignal=$_POST['lowStock'];
+    $FilterCode = $_POST['fCode'];
+    $PartNumber = $_POST['pName'];
+    $FilterName = $_POST['fName'];
+    $Quantity = $_POST['quantity'];
+    $MaxStock = $_POST['maxStock'];
+    $LowStockSignal = $_POST['lowStock'];
 
+    $Length = $_POST['length'];
+    $LengthUnit = $_POST['lengthUnit'];
 
-     $checkCode="SELECT * From filters where FilterCode='$FilterCode'";
+    $Width = $_POST['width'];
+    $WidthUnit = $_POST['widthUnit'];
+
+    $Height = $_POST['height'];
+    $HeightUnit = $_POST['heightUnit'];
+
+    // Check if Filter Code already exists
+    $checkCode="SELECT * From filters where FilterCode='$FilterCode'";
      $checkCode2="SELECT * From filters where FilterName='$FilterName'";
      $checkCode3="SELECT * From filters where PartNumber='$PartNumber'";
      $result=$conn->query($checkCode);
@@ -43,8 +51,8 @@ if(isset($_POST['submitButton'])){
                     header("Location: addInterface.php?signal=toolow");
                     exit();
                 } else {
-                    $insertQuery = "INSERT INTO filters(FilterCode, PartNumber, FilterName, Materials, Quantity, MaxStock, LowStockSignal)
-                                    VALUES ('$FilterCode', '$PartNumber', '$FilterName', '$Materials', '$Quantity', '$MaxStock', '$LowStockSignal')";
+                    $insertQuery = "INSERT INTO filters (FilterCode, PartNumber, FilterName, Length, LengthUnit, Width, WidthUnit, Height, HeightUnit, Quantity, MaxStock, LowStockSignal)
+                            VALUES ('$FilterCode', '$PartNumber', '$FilterName', '$Length', '$LengthUnit', '$Width', '$WidthUnit', '$Height', '$HeightUnit', '$Quantity', '$MaxStock', '$LowStockSignal')";
                     if ($conn->query($insertQuery) == TRUE) {
                         header("Location: addInterface.php?add=Success");
                         exit();
@@ -57,6 +65,4 @@ if(isset($_POST['submitButton'])){
     }
     
 }
-
 ?>
-
