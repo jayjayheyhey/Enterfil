@@ -23,6 +23,11 @@ include("connect.php");
           </div>
           <div class="input-group">
               <i class="fas fa-book"></i>
+              <input type="text" name="pName" id="pName" placeholder="Part Number" required>
+              <label for="pName">Part Number</label>
+          </div>
+          <div class="input-group">
+              <i class="fas fa-book"></i>
               <input type="text" name="fName" id="fName" placeholder="Filter Name" required>
               <label for="fName">Filter Name</label>
           </div>
