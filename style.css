@@ -11,7 +11,7 @@ body{
 
 .ShowTableContainer{
     background: #fff;
-    width: 900px;
+    width: 1600px;
     padding: 1.5rem;
     margin: 50px auto;
     border-radius: 10px;
@@ -102,6 +102,7 @@ textarea::placeholder {
 }
 
 textarea:focus~label,textarea:not(:placeholder-shown)~label {
+    top:-3em;
     color: hsl(327, 90%, 28%);
     font-size: 15px;
 }
