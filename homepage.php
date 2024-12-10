@@ -44,6 +44,10 @@ include("filters_table.php");
         <?php
          renderFiltersTable($conn);
          ?>
+
+        <form method="post" action="generate_pdf.php" target="_blank">
+            <input type="submit" class="btn" value="Download PDF" name="downloadPDFButton">
+        </form>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
