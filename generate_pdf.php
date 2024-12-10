@@ -5,7 +5,7 @@ require('./fpdf/fpdf.php');
 include("connect.php");
 
 // Create PDF instance
-$pdf = new FPDF();
+$pdf = new FPDF('L', 'mm', 'A4'); // 'L' for Landscape, 'mm' for millimeters, 'A4' size
 $pdf->AddPage();
 
 // Set global font
@@ -24,7 +24,18 @@ $pdf->SetTextColor(...$headerTextColor);
 $pdf->SetDrawColor(...$borderColor);
 
 $headers = ['OEM Code', 'Part Number', 'Filter Name', 'Dimensions', 'Quantity', 'Max Stock', 'Low Stock Signal'];
-$columnWidths = [30, 30, 50, 50, 20, 20, 30]; // Adjust column widths to match CSS
+$columnWidths = [30, 30, 50, 50, 20, 30, 30]; // Adjust column widths to match CSS
+
+// Get the page width
+$pageWidth = $pdf->GetPageWidth();
+
+// Calculate the total width of the table
+$tableWidth = array_sum($columnWidths);
+
+// Calculate the starting X position to center the table
+$x = ($pageWidth - $tableWidth) / 2;
+$pdf->SetX($x); // Set X to the calculated center
+
 
 foreach ($headers as $index => $col) {
     $pdf->Cell($columnWidths[$index], 10, $col, 1, 0, 'C', true);
