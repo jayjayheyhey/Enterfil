@@ -38,6 +38,9 @@ include("filters_table.php");
             <input type="text" class="form-control" id="live_search" autocomplete="off"
                 placeholder="Search ... ">
         </form>
+        <form method="post" action="generate_pdf.php" target="_blank">
+            <input type="submit" class="btn" id="downloadPdf" value="Download PDF" name="downloadPDFButton">
+        </form>
 
         <div id="searchresult"></div>
          <!-- Display Filters Table -->
@@ -45,9 +48,6 @@ include("filters_table.php");
          renderFiltersTable($conn);
          ?>
 
-        <form method="post" action="generate_pdf.php" target="_blank">
-            <input type="submit" class="btn" value="Download PDF" name="downloadPDFButton">
-        </form>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

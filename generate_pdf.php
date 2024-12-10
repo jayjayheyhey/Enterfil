@@ -43,15 +43,6 @@ if ($result && $result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $dimensions = "{$row['Length']}{$row['LengthUnit']} x {$row['Width']}{$row['WidthUnit']} x {$row['Height']}{$row['HeightUnit']}";
 
-        // Determine row background color based on stock levels
-        if ($row['Quantity'] <= $row['LowStockSignal']) {
-            $pdf->SetFillColor(245, 66, 66); // Red for low stock
-        } elseif ($row['Quantity'] < $row['MaxStock'] / 2) {
-            $pdf->SetFillColor(255, 225, 53); // Yellow for medium stock
-        } else {
-            $pdf->SetFillColor(128, 255, 128); // Green for high stock
-        }
-
         $data = [
             $row['FilterCode'] ?? 'N/A',
             $row['PartNumber'] ?? 'N/A',
@@ -64,6 +55,20 @@ if ($result && $result->num_rows > 0) {
 
         foreach ($data as $index => $cell) {
             $align = ($index == 4) ? 'C' : 'L'; // Align Quantity to center
+
+            // Check if the column is "Quantity" and apply specific colors
+            if ($index == 4) { // Quantity column
+                if ($row['Quantity'] <= $row['LowStockSignal']) {
+                    $pdf->SetFillColor(245, 66, 66); // Red for low stock
+                } elseif ($row['Quantity'] < $row['MaxStock'] / 2) {
+                    $pdf->SetFillColor(255, 225, 53); // Yellow for medium stock
+                } else {
+                    $pdf->SetFillColor(128, 255, 128); // Green for high stock
+                }
+            } else {
+                $pdf->SetFillColor(255, 255, 255); // White for all other cells
+            }
+
             $pdf->Cell($columnWidths[$index], 10, $cell, 1, 0, $align, true);
         }
         $pdf->Ln();

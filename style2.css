@@ -43,3 +43,4 @@ textarea:not(:placeholder-shown) + label {
     top: -8em; 
     color:hsl(0, 0%, 0%); /* Or a custom color */
 }
+
