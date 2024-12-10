@@ -5,7 +5,7 @@ require('./fpdf/fpdf.php');
 include("connect.php");
 
 // Create PDF instance
-$pdf = new FPDF();
+$pdf = new FPDF('L', 'mm', 'A4');
 $pdf->AddPage();
 
 // Set global font
@@ -24,7 +24,7 @@ $pdf->SetTextColor(...$headerTextColor);
 $pdf->SetDrawColor(...$borderColor);
 
 $headers = ['OEM Code', 'Part Number', 'Filter Name', 'Dimensions', 'Quantity', 'Max Stock', 'Low Stock Signal'];
-$columnWidths = [30, 30, 50, 50, 20, 20, 30]; // Adjust column widths to match CSS
+$columnWidths = [30, 30, 70, 50, 20, 30, 40]; // Adjust column widths to match CSS
 
 foreach ($headers as $index => $col) {
     $pdf->Cell($columnWidths[$index], 10, $col, 1, 0, 'C', true);
