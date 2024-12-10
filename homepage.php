@@ -21,7 +21,7 @@ include("filters_table.php");
 </head>
 <body>
     <div class="container" id=dashboard>
-        <h1 class="form-title">Finished Product Module Main Dashboard</h1>
+        <h1 class="form-title">Raw Materials System Main Dashboard</h1>
         <form method ="post" action="addInterface.php">
             <input type="submit" class="btn" value="Add Item" name="addItemButton">
         </form>
