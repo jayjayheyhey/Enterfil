@@ -44,3 +44,6 @@ textarea:not(:placeholder-shown) + label {
     color:hsl(0, 0%, 0%); /* Or a custom color */
 }
 
+#downloadPdf{
+    margin-left: 1000rem;
+}

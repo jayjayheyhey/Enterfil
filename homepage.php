@@ -11,10 +11,10 @@ include("filters_table.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="dashboard.css">
-    <link rel="stylesheet" href="tablestyle.css">
     <link rel="stylesheet" href="search.css">
+    <link rel="stylesheet" href="tablestyle2.css">
     <title>Homepage</title>
 
     
@@ -38,8 +38,9 @@ include("filters_table.php");
             <input type="text" class="form-control" id="live_search" autocomplete="off"
                 placeholder="Search ... ">
         </form>
-        <form method="post" action="generate_pdf.php" target="_blank">
-            <input type="submit" class="btn" id="downloadPdf" value="Download PDF" name="downloadPDFButton">
+        <form method="post" action="generate_pdf.php" target="_blank" class="right-align">
+            <i class="fas fa-clipboard"></i>
+            <a href="generate_pdf.php" id="downloadLink" class="download-link"><span class="emphasize">Generate Inventory Report</span></a>
         </form>
 
         <div id="searchresult"></div>
@@ -48,7 +49,7 @@ include("filters_table.php");
          renderFiltersTable($conn);
          ?>
 
-    </div>
+        </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
