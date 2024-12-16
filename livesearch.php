@@ -16,7 +16,7 @@ if (isset($_POST['input'])) {
 ?>
 
 <table>
-    <thead>
+    <thead style="font-family: Arial, sans-serif";>
         <tr>
             <th>OEM Code</th>
             <th>Part Number</th>
@@ -27,7 +27,7 @@ if (isset($_POST['input'])) {
             <th>Low Stock Signal</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody style="font-family: Arial, sans-serif";>
         <?php
         if ($result && $result->num_rows > 0) {
             // Output data of each row

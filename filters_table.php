@@ -3,7 +3,7 @@ function renderFiltersTable($conn) {
     ?>
     <div id="filters_table">
         <table>
-            <thead>
+            <thead style="font-family: Arial, sans-serif";>
                 <tr>
                     <th>OEM Code</th>
                     <th>Part Number</th>
@@ -14,7 +14,7 @@ function renderFiltersTable($conn) {
                     <th>Low Stock Signal</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody style="font-family: Arial, sans-serif";>
                 <?php
                 // Fetch data from filters table
                 $sql = "SELECT * FROM filters"; // Updated table name

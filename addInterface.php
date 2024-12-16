@@ -83,6 +83,7 @@ if (isset($_POST['submitButton'])) {
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style2.css">
     <link rel="stylesheet" href="select.css">
+    <link rel="stylesheet" href="font.css">
     <title>Add Filter</title>
 </head>
 <body>

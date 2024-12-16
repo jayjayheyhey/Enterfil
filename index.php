@@ -15,17 +15,17 @@ if(isset($_GET['error']) && $_GET['error'] == 1) {
 </head>
 <body>
     <div class="container" id="signIn">
-        <h1 class="form-title">Sign In</h1>
+        <h1 class="form-title" style="font-family: Arial, sans-serif";>Sign In</h1>
         <form method="post" action="register.php">
           <div class="input-group">
               <i class="fas fa-envelope"></i>
-              <input type="text" name="username" id="username" placeholder="Username" required>
-              <label for="username">Username</label>
+              <input type="text" name="username" id="username" placeholder="Username" required style="font-family: Arial, sans-serif";>
+              <label for="username" style="font-family: Arial, sans-serif";>Username</label>
           </div>
           <div class="input-group">
               <i class="fas fa-lock"></i>
-              <input type="password" name="password" id="password" placeholder="Password" required>
-              <label for="password">Password</label>
+              <input type="password" name="password" id="password" placeholder="Password" required style="font-family: Arial, sans-serif";>
+              <label for="password" style="font-family: Arial, sans-serif";>Password</label>
           </div>
          <input type="submit" class="btn" value="Sign In" name="signIn">
         </form>

@@ -34,7 +34,9 @@ if ($result->num_rows > 0) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style2.css">
-    <link rel="stylesheet" href="tablestyle.css">
+    <link rel="stylesheet" href="tablestyle2.css">
+    <link rel="stylesheet" href="font.css">
+
     <title>Search Filter</title>
 </head>
 <body>

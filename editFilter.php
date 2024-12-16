@@ -107,6 +107,8 @@ if(isset($_POST['searchButton'])){
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style2.css">
     <link rel="stylesheet" href="select.css">
+    <link rel="stylesheet" href="font.css">
+
     <title>Edit Filter</title>
 </head>
 <body>

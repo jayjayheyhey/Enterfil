@@ -76,12 +76,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style2.css">
-    <link rel="stylesheet" href="tablestyle.css">
+    <link rel="stylesheet" href="tablestyle2.css">
+    <link rel="stylesheet" href="font.css">
+
     <title>Remove Filter</title>
 </head>
 <body>
     <div class="ShowTableContainer" id="removeItem">
-        <h1 class="form-title">Remove Filter</h1>
+        <h1 class="form-title" style="font-family: Arial, sans-serif";>Remove Filter</h1>
         
         <!-- Display success/error message -->
         <?php if (!empty($errorMessage)): ?>
@@ -91,14 +93,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <!-- Show the confirmation form after FilterCode input -->
         <?php if ($confirmation) { ?>
             <p style="color: hsl(327,90%,28%);">Are you sure you want to delete this filter?</p>
-            <p><strong>Filter Code:</strong> <?php echo htmlspecialchars($FilterCode); ?></p>
-            <p><strong>Filter Name:</strong> <?php echo htmlspecialchars($FilterName); ?></p>
+            <p style="font-family: Arial, sans-serif";><strong>Filter Code:</strong> <?php echo htmlspecialchars($FilterCode); ?></p>
+            <p style="font-family: Arial, sans-serif";><strong>Filter Name:</strong> <?php echo htmlspecialchars($FilterName); ?></p>
             <form method="post" action="">
                 <input type="hidden" name="FilterCode" value="<?php echo htmlspecialchars($FilterCode); ?>">
                 <input type="submit" class="btn" value="Yes" name="confirmDelete">
             </form>
             <form method="get" action="removeItem.php">
-                <button type="submit" class="btn">Cancel</button>
+                <button type="submit" class="btn" style="font-family: Arial, sans-serif";>Cancel</button>
             </form>
         <?php } else { ?>
             <!-- Form for entering the FilterCode -->
@@ -111,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <option value="<?php echo htmlspecialchars($code); ?>">
                         <?php endforeach; ?>
                     </datalist>
-                    <label for="FilterCode">Filter Code</label>
+                    <label for="FilterCode" style="font-family: Arial, sans-serif";>Filter Code</label>
                 </div>
                 <input type="submit" class="btn" value="Delete Filter">
             </form>

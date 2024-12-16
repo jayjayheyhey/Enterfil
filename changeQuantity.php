@@ -94,8 +94,10 @@ if (isset($_POST['submitQuantityButton'])) {
     <title>Change Quantity</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style2.css">
-    <link rel="stylesheet" href="tablestyle.css">
+    <link rel="stylesheet" href="tablestyle2.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="font.css">
+
 </head>
 <body>
     <!-- Section to select FilterCode -->

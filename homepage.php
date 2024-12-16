@@ -21,7 +21,7 @@ include("filters_table.php");
 </head>
 <body>
     <div class="container" id=dashboard>
-        <h1 class="form-title">Raw Materials System Main Dashboard</h1>
+        <h1 class="form-title" style="font-family: Arial, sans-serif";>Raw Materials System Main Dashboard</h1>
         <form method ="post" action="addInterface.php">
             <input type="submit" class="btn" value="Add Item" name="addItemButton">
         </form>
@@ -40,7 +40,7 @@ include("filters_table.php");
         </form>
         <form method="post" action="generate_pdf.php" target="_blank" class="right-align">
             <i class="fas fa-clipboard"></i>
-            <a href="generate_pdf.php" id="downloadLink" class="download-link"><span class="emphasize">Generate Inventory Report</span></a>
+            <a href="generate_pdf.php" id="downloadLink" class="download-link" style="font-family: Arial, sans-serif";><span class="emphasize">Generate Inventory Report</span></a>
         </form>
 
         <div id="searchresult"></div>
