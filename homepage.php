@@ -14,6 +14,7 @@ include("filters_table.php");
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="dashboard.css">
     <link rel="stylesheet" href="search.css">
+    <link rel="stylesheet" href="border.css">
     <link rel="stylesheet" href="tablestyle2.css">
     <title>Homepage</title>
 
@@ -38,10 +39,27 @@ include("filters_table.php");
             <input type="text" class="form-control" id="live_search" autocomplete="off"
                 placeholder="Search ... ">
         </form>
-        <form method="post" action="generate_pdf.php" target="_blank" class="right-align">
-            <i class="fas fa-clipboard"></i>
-            <a href="generate_pdf.php" id="downloadLink" class="download-link" style="font-family: Arial, sans-serif";><span class="emphasize">Generate Inventory Report</span></a>
-        </form>
+        <div class="container2">
+            <form method="post" action="generate_pdf.php" target="_blank" class="right-align">
+                <i class="fas fa-clipboard"></i>
+                <a href="generate_pdf.php" id="downloadLink" class="download-link" style="font-family: Arial, sans-serif";><span class="emphasize">Generate Inventory Report</span></a>
+            </form>
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="color-box warning"></div>
+                    <span class="status" >Warning</span>
+                </div>
+                <div class="legend-item">
+                    <div class="color-box caution"></div>
+                    <span class="status">Caution</span>
+                </div>
+                <div class="legend-item">
+                    <div class="color-box good"></div>
+                    <span class="status">Good</span>
+                </div>
+            </div>
+        </div>
+
 
         <div id="searchresult"></div>
          <!-- Display Filters Table -->
