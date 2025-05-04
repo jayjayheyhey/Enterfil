@@ -17,7 +17,7 @@ $result = mysqli_query($conn, $query);
     <link rel="stylesheet" href="search.css">
     <link rel="stylesheet" href="border.css">
     <link rel="stylesheet" href="tablestyle2.css">
-    <title>Homepage</title>
+    <title>Order Form Dashboard</title>
 
     
 </head>
