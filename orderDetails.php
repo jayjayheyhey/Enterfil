@@ -90,20 +90,43 @@ if (isset($_GET['jobOrderNumber'])) {
             justify-content: space-between;
         }
 
+        .downloadlink {
+            font-size:16px;          /* Standard font size */
+            color: rgb(113, 113, 181);           /* Blue color for the link */
+            text-decoration: none;    /* Remove the underline */
+            font-weight: normal;      /* Default weight */
+            cursor: pointer;         /* Change cursor to indicate clickable link */
+            text-decoration: underline;
+        }
+
+        .downloadlink:hover {
+            text-decoration: underline; /* Underline when hovered */
+            font-weight: bold;          /* Make the text bold when hovered */
+            color: rgb(82, 82, 139);           /* Blue color for the link */
+        }
+
     </style>
 </head>
 <body>
     
     <div class="container">
-        <form method="post" action="generateOrderForm.php" target="_blank" style="margin-top: 10px" class="right-align">
-                <i class="fas fa-clipboard"></i>
-                <input type="hidden" name="jobOrderNumber" value="<?= $order['jobOrderNumber'] ?>">
-                <a href="generateOrderForm.php" id="downloadLink" class="download-link" style="font-family: Arial, sans-serif";><span class="emphasize">Download Order Form</span></a>
-            </form>
+        <div class="right-align" style="margin-top: 10px; margin-bottom:20px;">
+            <i class="fas fa-clipboard"></i>
+            <a href="generateOrderForm.php?jobOrderNumber=<?= $order['jobOrderNumber'] ?>" 
+            id="downloadLink" 
+            class="downloadlink" 
+            style="font-family: Arial, sans-serif;">
+                <span class="emphasize">Download Order Form</span>
+            </a>
+        </div>
 
-        <div class="job-order-header">Job Order No. <?= $order['jobOrderNumber'] ?></div>
-        <div class ="job-order-header"><span class="label">Date Created:</span> <?= $order['dateCreated'] ?></div>
+
+        <div class="row job-order-header">
+            <div><span class="label">Job Order No.:</span> <?= $order['jobOrderNumber'] ?></div>
+            <div><span class="label">Date Created:</span> <?= $order['dateCreated'] ?></div>
+        </div>
         <div class="section-line"></div>
+
 
 
         <div class="row">
