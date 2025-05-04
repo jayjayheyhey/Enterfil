@@ -7,6 +7,7 @@ $submittedData = [];
 if (isset($_POST['submitButton'])) {
     // Get form inputs
     $jobOrderNumber = $_POST['jobOrderNumber'];
+    $dateCreated = date("Y-m-d"); // gets the current date
     $company = $_POST['company'];
     $items = $_POST['items'];
     $quantity = $_POST['quantity'];
@@ -24,7 +25,7 @@ if (isset($_POST['submitButton'])) {
 
     $submittedData = compact(
         'jobOrderNumber', 'company', 'items', 'quantity', 'requiredDate', 'cap', 'size', 'gasket', 'oring',
-        'filterMedia', 'insideSupport', 'outsideSupport', 'brand', 'price'
+        'filterMedia', 'insideSupport', 'outsideSupport', 'brand', 'price','dateCreated'
     );
 
     $checkCode = "SELECT * FROM order_form WHERE jobOrderNumber = '$jobOrderNumber'";
@@ -32,9 +33,9 @@ if (isset($_POST['submitButton'])) {
         $errorMessage = "Order code already exists.";
     } else {
         $stmt = $conn->prepare("INSERT INTO order_form 
-        (jobOrderNumber, company, items, quantity, requiredDate, cap, size, gasket, `o-ring`, filterMedia, insideSupport, outsideSupport, brand, price, filterDrawing) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ississsssssssbd", $jobOrderNumber, $company, $items, $quantity, $requiredDate, $cap, $size, $gasket, $oring, $filterMedia, $insideSupport, $outsideSupport, $brand, $price, $filterDrawing);
+            (jobOrderNumber, company, items, quantity, requiredDate, cap, size, gasket, oring, filterMedia, insideSupport, outsideSupport, brand, price, filterDrawing, dateCreated) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ississsssssssbdss", $jobOrderNumber, $company, $items, $quantity, $requiredDate, $cap, $size, $gasket, $oring, $filterMedia, $insideSupport, $outsideSupport, $brand, $price, $filterDrawing, $dateCreated);
 
         if ($stmt->execute()) {
             $errorMessage = "<span id='success'>Order form successfully added!</span>";
@@ -137,7 +138,7 @@ if (isset($_POST['submitButton'])) {
             <div class="input-group">
                 <i class="fas fa-tag"></i>
                 <input type="text" name="brand" id="brand" placeholder="Brand" required value="<?php echo isset($submittedData['brand']) ? $submittedData['brand']: ''; ?>">
-                <label for ="brand">O-Ring</label>
+                <label for ="brand">Brand</label>
             </div>
 
             <div class="input-group">
