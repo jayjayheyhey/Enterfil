@@ -2,8 +2,8 @@
 require('fpdf/fpdf.php');
 include("connect.php");
 
-if (isset($_POST['jobOrderNumber'])) {
-    $jobOrderNumber = $_POST['jobOrderNumber'];
+if (isset($_GET['jobOrderNumber'])) {
+    $jobOrderNumber = $_GET['jobOrderNumber'];
 
     $stmt = $conn->prepare("SELECT * FROM order_form WHERE jobOrderNumber = ?");
     $stmt->bind_param("i", $jobOrderNumber);
@@ -18,12 +18,12 @@ if (isset($_POST['jobOrderNumber'])) {
         }
 
         function addLabeledField($label, $value, $width = 90) {
-            $this->SetFont('sans-serif', '', 12);
+            $this->SetFont('Arial', '', 12);
             $this->Cell($width, 10, $label . ': ' . $value, 0, 0);
         }
 
         function addUnderlineField($label, $value = '') {
-            $this->SetFont('sans-serif', '', 12);
+            $this->SetFont('Arial', '', 12);
             $this->Cell(50, 10, $label . ':', 0, 0);
             $this->Cell(0, 10, '_______________________________________________________', 0, 1);
         }
@@ -33,10 +33,10 @@ if (isset($_POST['jobOrderNumber'])) {
     $pdf->AddPage();
 
     // Job Order Number with line
-    $pdf->SetFont('sans-serif', 'B', 16);
+    $pdf->SetFont('Arial', 'B', 16);
     $pdf->Cell(50, 10, 'Job Order No.: ' . $order['jobOrderNumber'], 0, 1);
 
-    $pdf->SetFont('sans-serif', '', 12);
+    $pdf->SetFont('Arial', '', 12);
 
     // Set widths
     $colWidth = 95;
@@ -54,9 +54,9 @@ if (isset($_POST['jobOrderNumber'])) {
     $pdf->drawLine();
 
     // Descriptions section
-    $pdf->SetFont('sans-serif', 'B', 13);
+    $pdf->SetFont('Arial', 'B', 13);
     $pdf->Cell(0, 10, 'Descriptions:', 0, 1);
-    $pdf->SetFont('sans-serif', '', 12);
+    $pdf->SetFont('Arial', '', 12);
 
     $pdf->addUnderlineField('Cap');
     $pdf->addUnderlineField('Size');
@@ -69,16 +69,16 @@ if (isset($_POST['jobOrderNumber'])) {
 
     $pdf->drawLine();
 
-    $pdf->SetFont('sans-serif', 'B', 13);
+    $pdf->SetFont('Arial', 'B', 13);
     $pdf->Cell(0, 10, 'Filter Drawing:', 0, 1);
-    $pdf->SetFont('sans-serif', '', 12);
+    $pdf->SetFont('Arial', '', 12);
 
     // Drawing section
     if (!empty($order['filterDrawing'])) {
         $imgPath = 'temp_image.jpg';
         file_put_contents($imgPath, $order['filterDrawing']);
         $pdf->Ln(10);
-        $pdf->SetFont('sans-serif', 'B', 13);
+        $pdf->SetFont('Arial', 'B', 13);
         $pdf->Cell(0, 10, 'Filter Drawing', 0, 1, 'C');
         $pdf->Image($imgPath, null, null, 100);
         unlink($imgPath);
@@ -86,7 +86,7 @@ if (isset($_POST['jobOrderNumber'])) {
 
     // Move to near the bottom of the page
     $pdf->SetY(-40); // 40mm from bottom
-    $pdf->SetFont('sans-serif', '', 12);
+    $pdf->SetFont('Arial', '', 12);
 
     // Width of each column (page width - margins = ~190mm)
     $columnWidth = 95;
