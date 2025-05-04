@@ -25,7 +25,11 @@ $result = mysqli_query($conn, $query);
     <div class="container" id="dashboard">
         <h1 class="form-title">Order Form Dashboard</h1>
         <form method="post" action="addOrder.php">
-            <input type="submit" class="btn" value="Add Order" name="addOrderButton">
+            <input type="submit" class="btn" value="Add Order" name="editOrderButton">
+        </form>
+
+        <form method="post" action="searchJobOrder.php">
+            <input type="submit" class="btn" value="Edit Order" name="editOrderButton">
         </form>
 
         <table class="styled-table">
