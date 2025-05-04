@@ -97,7 +97,61 @@ if (isset($_POST['submitButton'])) {
                 <input type="text" name="cap" id="cap" placeholder="Cap" required value="<?php echo isset($submittedData['cap']) ? $submittedData['cap'] : ''; ?>">
                 <label for="cap">Cap</label>
             </div>
+            
+            <div class="input-group">
+                <i class="fas fa-ruler"></i>
+                <input type="text" name="size" id= "size" placeholder="Size" required value="<?php echo isset($submittedData['size']) ? $submittedData['size']: ''; ?>">
+                <label for ="size">Size</label>
+            </div>
 
+            <div class="input-group">
+                <i class="fas fa-dot-circle"></i>
+                <input type="text" name="gasket" id ="gasket" placeholder="Gasket" required value="<?php echo isset($submittedData['gasket']) ? $submittedData['gasket']: ''; ?>">
+                <label for ="gasket">Gasket</label>
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-ring"></i>
+                <input type="text" name="oring" id ="oring" placeholder="O-Ring" required value="<?php echo isset($submittedData['oring']) ? $submittedData['oring']: ''; ?>">
+                <label for ="oring">O-Ring</label>
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-filter"></i>
+                <input type="text" name="filterMedia" id="filterMedia" placeholder="Filter Media" required value="<?php echo isset($submittedData['filterMedia']) ? $submittedData['filterMedia']: ''; ?>">
+                <label for ="filterMedia">Filter Media</label>
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-arrow-down"></i>
+                <input type="text" name="insideSupport" id="insideSupport" placeholder="Inside Support" required value="<?php echo isset($submittedData['insideSupport']) ? $submittedData['insideSupport']: ''; ?>">
+                <label for ="insideSupport">Inside Support</label>
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-arrow-up"></i>
+                <input type="text" name="outsideSupport" id="outsideSupport"placeholder="Outside Support" required value="<?php echo isset($submittedData['outsideSupport']) ? $submittedData['outsideSupport']: ''; ?>">
+                <label for ="outsideSupport">Ouside Support</label>
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-tag"></i>
+                <input type="text" name="brand" id="brand" placeholder="Brand" required value="<?php echo isset($submittedData['brand']) ? $submittedData['brand']: ''; ?>">
+                <label for ="brand">O-Ring</label>
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-money-bill"></i>
+                <input type="number" step="0.01" name="price" id="price" placeholder="Price (₱)" required value="<?php echo isset($submittedData['price']) ? $submittedData['price']: ''; ?>">
+                <label for ="price">Price</label>
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-image"></i>
+                <input type="file" name="filterDrawing" accept="image/*" required>
+                <label for ="filterDrawing">Filter Drawing</label>
+            </div>
+            
             <input type="submit" class="btn" value="Submit Filter" name="submitButton">
                 
         <form method="post" action="orderFormDashboard.php">
