@@ -19,7 +19,13 @@ if (isset($_GET['jobOrderNumber'])) {
 <html>
 <head>
     <title>Order Details</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="search.css">
+    <link rel="stylesheet" href="border.css">
+    <link rel="stylesheet" href="tablestyle2.css">
     <style>
         .section-line {
             border-top: 2px solid #000;
@@ -87,7 +93,14 @@ if (isset($_GET['jobOrderNumber'])) {
     </style>
 </head>
 <body>
+    
     <div class="container">
+        <form method="post" action="generateOrderForm.php" target="_blank" style="margin-top: 10px" class="right-align">
+                <i class="fas fa-clipboard"></i>
+                <input type="hidden" name="jobOrderNumber" value="<?= $order['jobOrderNumber'] ?>">
+                <a href="generateOrderForm.php" id="downloadLink" class="download-link" style="font-family: Arial, sans-serif";><span class="emphasize">Download Order Form</span></a>
+            </form>
+
         <div class="job-order-header">Job Order No. <?= $order['jobOrderNumber'] ?></div>
         <div class ="job-order-header"><span class="label">Date Created:</span> <?= $order['dateCreated'] ?></div>
         <div class="section-line"></div>
@@ -126,7 +139,7 @@ if (isset($_GET['jobOrderNumber'])) {
             <?php endif; ?>
         </div>
 
-        <a class="back-link" href="orderFormDashboard.php">← Back to Dashboard</a>
+        <a class="back-link" href="orderFormDashboard.php">Back to Dashboard</a>
     </div>
 </body>
 </html>
