@@ -1,8 +1,9 @@
 <?php
 session_start();
 include("connect.php");
-include("filters_table.php");
 
+$query = "SELECT jobOrderNumber, quantity, requiredDate FROM order_form";
+$result = mysqli_query($conn, $query);
 ?>
 
 
@@ -21,12 +22,32 @@ include("filters_table.php");
     
 </head>
 <body>
-    <div class="container" id=dashboard>
-        <h1 class="form-title" style="font-family: Arial, sans-serif";>Order Form Dashboard</h1>
-        <form method ="post" action="addOrder.php">
+    <div class="container" id="dashboard">
+        <h1 class="form-title">Order Form Dashboard</h1>
+        <form method="post" action="addOrder.php">
             <input type="submit" class="btn" value="Add Order" name="addOrderButton">
         </form>
-    </div>
 
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Job Order Number</th>
+                    <th>Quantity</th>
+                    <th>Required Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while($row = mysqli_fetch_assoc($result)): ?>
+                    <tr>
+                        <td><a href="orderDetails.php?jobOrderNumber=<?= $row['jobOrderNumber'] ?>">View</a></td>
+                        <td><?= $row['jobOrderNumber'] ?></td>
+                        <td><?= $row['quantity'] ?></td>
+                        <td><?= $row['requiredDate'] ?></td>
+                    </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

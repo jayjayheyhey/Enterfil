@@ -2,35 +2,43 @@
 include("connect.php");
 
 $errorMessage = "";
-$submittedData = []; // To hold user-submitted data
+$submittedData = [];
 
 if (isset($_POST['submitButton'])) {
+    // Get form inputs
     $jobOrderNumber = $_POST['jobOrderNumber'];
     $company = $_POST['company'];
     $items = $_POST['items'];
     $quantity = $_POST['quantity'];
+    $requiredDate = $_POST['requiredDate'];
+    $cap = $_POST['cap'];
+    $size = $_POST['size'];
+    $gasket = $_POST['gasket'];
+    $oring = $_POST['oring'];
+    $filterMedia = $_POST['filterMedia'];
+    $insideSupport = $_POST['insideSupport'];
+    $outsideSupport = $_POST['outsideSupport'];
+    $brand = $_POST['brand'];
+    $price = $_POST['price'];
+    $filterDrawing = file_get_contents($_FILES['filterDrawing']['tmp_name']);
 
-    // Store submitted data so we can re-populate the form if needed
-    $submittedData = [
-        'jobOrderNumber' => $jobOrderNumber,
-        'company' => $company,
-        'items' => $items,
-        'quantity' => $quantity,
-    ];
+    $submittedData = compact(
+        'jobOrderNumber', 'company', 'items', 'quantity', 'requiredDate', 'cap', 'size', 'gasket', 'oring',
+        'filterMedia', 'insideSupport', 'outsideSupport', 'brand', 'price'
+    );
 
-    // Validate inputs
     $checkCode = "SELECT * FROM order_form WHERE jobOrderNumber = '$jobOrderNumber'";
-
     if ($conn->query($checkCode)->num_rows > 0) {
         $errorMessage = "Order code already exists.";
-        }else {
-        // Insert the new filter if validation passes
-        $insertQuery = "INSERT INTO order_form (jobOrderNumber, company, items, quantity)
-                        VALUES ('$jobOrderNumber', '$company', '$items', '$quantity')";
+    } else {
+        $stmt = $conn->prepare("INSERT INTO order_form 
+        (jobOrderNumber, company, items, quantity, requiredDate, cap, size, gasket, `o-ring`, filterMedia, insideSupport, outsideSupport, brand, price, filterDrawing) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ississsssssssbd", $jobOrderNumber, $company, $items, $quantity, $requiredDate, $cap, $size, $gasket, $oring, $filterMedia, $insideSupport, $outsideSupport, $brand, $price, $filterDrawing);
 
-        if ($conn->query($insertQuery) === TRUE) {
+        if ($stmt->execute()) {
             $errorMessage = "<span id='success'>Order form successfully added!</span>";
-            $submittedData = []; // Clear form data on success
+            $submittedData = [];
         } else {
             $errorMessage = "Error: " . $conn->error;
         }
@@ -59,29 +67,39 @@ if (isset($_POST['submitButton'])) {
 
         <form method="post" action="addOrder.php">
             <div class="input-group">
-                <i class="fas fa-lock"></i>
+                <i class="fas fa-hashtag"></i>
                 <input type="text" name="jobOrderNumber" id="jobOrderNumber" placeholder="Job Order Number" required value="<?php echo isset($submittedData['jobOrderNumber']) ? $submittedData['jobOrderNumber'] : ''; ?>">
                 <label for="jobOrderNumber">Job Order Number</label>
             </div>
             <div class="input-group">
-                <i class="fas fa-book"></i>
+                <i class="fas fa-building"></i>
                 <input type="text" name="company" id="company" placeholder="Company" required value="<?php echo isset($submittedData['company']) ? $submittedData['company'] : ''; ?>">
                 <label for="company">Company</label>
             </div>
             <div class="input-group">
-                <i class="fas fa-book"></i>
-                <input type="text" name="items" id="items" placeholder="Items" required value="<?php echo isset($submittedData['items']) ? $submittedData['items'] : ''; ?>">
-                <label for="items">Items</label>
+                <i class="fas fa-boxes"></i>
+                <input type="text" name="items" id="items" placeholder=" Items" required value="<?php echo isset($submittedData['items']) ? $submittedData['items'] : ''; ?>">
+                <label for="items"> Items</label>
             </div>
 
             <div class="input-group">
-                <i class="fas fa-book"></i>
-                <input type="text" name="quantity" id="quantity" placeholder="Quantity" required value="<?php echo isset($submittedData['quantity']) ? $submittedData['quantity'] : ''; ?>">
+                <i class="fas fa-sort-numeric-up"></i>
+                <input type="number" name="quantity" id="quantity" placeholder="Quantity" required value="<?php echo isset($submittedData['quantity']) ? $submittedData['quantity'] : ''; ?>">
                 <label for="quantity">Quantity</label>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-calendar-alt"></i>
+                <input type="date" name="requiredDate" id="requiredDate" placeholder="Required Date" required value="<?php echo isset($submittedData['requiredDate']) ? $submittedData['requiredDate'] : ''; ?>">
+                <label for="requiredDate">Required Date</label>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-cog"></i>
+                <input type="text" name="cap" id="cap" placeholder="Cap" required value="<?php echo isset($submittedData['cap']) ? $submittedData['cap'] : ''; ?>">
+                <label for="cap">Cap</label>
             </div>
 
             <input type="submit" class="btn" value="Submit Filter" name="submitButton">
-            
+                
         <form method="post" action="orderFormDashboard.php">
             <input type="submit" class="btn" value="Back to Dashboard">
         </form> 
