@@ -64,6 +64,7 @@ if (isset($_GET['jobOrderNumber'])) {
     $pdf->addUnderlineField('Inside Support', $order['insideSupport']);
     $pdf->addUnderlineField('Outside Support', $order['outsideSupport']);
     $pdf->addUnderlineField('Brand', $order['brand']);
+    $pdf->addUnderlineField('Price', $order['price']);
 
     $pdf->drawLine();
 
@@ -89,7 +90,7 @@ if (isset($_GET['jobOrderNumber'])) {
     $pdf->Cell($columnWidth, $height, 'Sales by:', 'TB', 0, 'L');
     $pdf->Cell($columnWidth, $height, 'Approved by:', 'TBL', 1, 'L');
 
-    $pdf->Output('D', $order['jobOrderNumber'] . '.pdf');
+    $pdf->Output('D', 'Job Order No.'.$order['jobOrderNumber'] . '.pdf');
 
 } else {
     echo "No job order number provided.";
