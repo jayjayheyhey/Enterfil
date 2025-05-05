@@ -2,7 +2,7 @@
 session_start();
 include("connect.php");
 
-$query = "SELECT jobOrderNumber, quantity, requiredDate FROM order_form";
+$query = "SELECT jobOrderNumber, company, quantity, requiredDate FROM order_form";
 $result = mysqli_query($conn, $query);
 ?>
 
@@ -35,12 +35,15 @@ $result = mysqli_query($conn, $query);
         <form method="post" action="homepage.php">
             <input type="submit" class="btn" value="Inventory">
         </form>
+        <form>
+        </form>
 
         <table class="styled-table">
             <thead>
                 <tr>
-                    <th></th>
+                    <th>Order Form</th>
                     <th>Job Order Number</th>
+                    <th>Company</th>
                     <th>Quantity</th>
                     <th>Required Date</th>
                 </tr>
@@ -50,6 +53,7 @@ $result = mysqli_query($conn, $query);
                     <tr>
                         <td><a href="orderDetails.php?jobOrderNumber=<?= $row['jobOrderNumber'] ?>">View</a></td>
                         <td><?= $row['jobOrderNumber'] ?></td>
+                        <td><?= $row['company'] ?></td>
                         <td><?= $row['quantity'] ?></td>
                         <td><?= $row['requiredDate'] ?></td>
                     </tr>
