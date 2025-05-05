@@ -32,6 +32,10 @@ $result = mysqli_query($conn, $query);
             <input type="submit" class="btn" value="Edit Order" name="editOrderButton">
         </form>
 
+        <form method="post" action="homepage.php">
+            <input type="submit" class="btn" value="Inventory">
+        </form>
+
         <table class="styled-table">
             <thead>
                 <tr>

@@ -76,6 +76,9 @@ if (isset($_POST['updateButton'])) {
 </head>
 <body>
     <div class="container" id="editOrderInterface">
+        <a href="orderFormDashboard.php" class="back-btn" title="Back">
+            <i class="fas fa-arrow-left"></i>
+        </a>
         <h1 class="form-title">Edit Order: <?= htmlspecialchars($jobOrderNumber) ?></h1>
         <?php if (!empty($errorMessage)): ?>
             <p class="popup"><?= $errorMessage ?></p>
@@ -176,10 +179,6 @@ HTML;
             </div>
 
             <input type="submit" class="btn" name="updateButton" value="Update Order">
-
-            <form method="post" action="orderFormDashboard.php">
-                <input type="submit" class="btn" value="Back to Dashboard">
-            </form>
         </form>
     </div>
 </body>
