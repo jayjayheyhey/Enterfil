@@ -1,3 +1,64 @@
+<?php
+include 'connect.php';
+
+if (isset($_POST['submitButton'])) {
+    // Collect form data
+    $jobOrderNumber = $_POST['jobOrderNumber'];
+    $company = $_POST['company'];
+    $items = $_POST['items'];
+    $quantity = $_POST['quantity'];
+    $requiredDate = $_POST['requiredDate'];
+    
+    // Filter components with their units of measure
+    $cap = $_POST['cap'];
+    $capUOM = $_POST['capUOM'];
+    
+    $size = $_POST['size'];
+    $sizeUOM = $_POST['sizeUOM'];
+    
+    $gasket = $_POST['gasket'];
+    $gasketUOM = $_POST['gasketUOM'];
+    
+    $oring = $_POST['oring'];
+    $oringUOM = $_POST['oringUOM'];
+    
+    // Other filter components
+    $filterMedia = $_POST['filterMedia'];
+    $insideSupport = $_POST['insideSupport'];
+    $outsideSupport = $_POST['outsideSupport'];
+    $brand = $_POST['brand'];
+    $price = $_POST['price'];
+    
+    // Prepare SQL statement
+    $stmt = $conn->prepare("INSERT INTO order_form (
+        jobOrderNumber, company, items, quantity, requiredDate, 
+        cap, capUOM, size, sizeUOM, gasket, gasketUOM, oring, oringUOM,
+        filterMedia, insideSupport, outsideSupport, brand, price
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    
+    // Bind parameters
+    $stmt->bind_param(
+        "ississsssssssssssd", 
+        $jobOrderNumber, $company, $items, $quantity, $requiredDate,
+        $cap, $capUOM, $size, $sizeUOM, $gasket, $gasketUOM, $oring, $oringUOM,
+        $filterMedia, $insideSupport, $outsideSupport, $brand, $price
+    );
+    
+    
+    // Execute statement
+    if ($stmt->execute()) {
+        // Redirect on success
+        header("Location: orderFormDashboard.php?success=1");
+        exit();
+    } else {
+        // Show error (don't redirect!)
+        echo "Error: " . $stmt->error;
+    }
+
+    $stmt->close();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,11 +66,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="addOrderInterface2.css">
-    <title>Add Filter</title>
+    <title>Add Order Form</title>
 </head>
 <body>
 <div class="container" id="addOrderInterface">
-        <a href="#" class="back-btn"><i class="fas fa-arrow-left"></i>
+        <a href="orderFormDashboard.php" class="back-btn"><i class="fas fa-arrow-left"></i>
         </a>
         <h1 class="form-title">Add Order</h1>
         
@@ -52,7 +113,7 @@
             
             <div class="form-row">
                 <div class="form-col">
-                    <!-- Modified Cap input to place dropdown beside the input -->
+                    <!-- Modified Cap input with correct name/id attributes -->
                     <div class="input-with-dropdown">
                         <div class="input-group">
                             <i class="fas fa-cog"></i>
@@ -72,13 +133,12 @@
                             <input type="text" name="size" id="size" placeholder="Size" required>
                             <label for="size">Size</label>
                         </div>
-                        <select name="capUOM" id="capUOM">
+                        <select name="sizeUOM" id="sizeUOM">
                             <option value="mm">mm</option>
                             <option value="cm">cm</option>
                             <option value="in">in</option>
                         </select>
                     </div>
-
 
                     <div class="input-with-dropdown">
                         <div class="input-group">
@@ -86,7 +146,7 @@
                             <input type="text" name="gasket" id="gasket" placeholder="Gasket" required>
                             <label for="gasket">Gasket</label>
                         </div>
-                        <select name="capUOM" id="capUOM">
+                        <select name="gasketUOM" id="gasketUOM">
                             <option value="mm">mm</option>
                             <option value="cm">cm</option>
                             <option value="in">in</option>
@@ -99,15 +159,12 @@
                             <input type="text" name="oring" id="oring" placeholder="O-Ring" required>
                             <label for="oring">O-Ring</label>
                         </div>
-                        <select name="capUOM" id="capUOM">
+                        <select name="oringUOM" id="oringUOM">
                             <option value="mm">mm</option>
                             <option value="cm">cm</option>
                             <option value="in">in</option>
                         </select>
                     </div>
-                    
-
-
                 </div>
                 
                 <div class="form-col">
@@ -142,6 +199,7 @@
                         <label for="price">Price</label>
                     </div>
                 </div>
+                
                 
                 <button type="submit" class="done-btn" name="submitButton">Mark as Draft</button>
             </div>
