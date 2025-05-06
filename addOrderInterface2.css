@@ -53,6 +53,31 @@ input{
     color:black;
 }
 
+/* Modified styles for horizontal layout of cap input and dropdown */
+.input-with-dropdown {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 15px;
+    gap: 10px;
+}
+
+.input-with-dropdown .input-group {
+    flex-grow: 1;
+    margin-bottom: 0;
+}
+
+.input-with-dropdown select {
+    width: 60px;
+    padding: 2px;
+    font-size: 12px;
+    border: 1px solid #757575;
+    background-color: white;
+    border-radius: 4px;
+    color: #333;
+    height: 25px;
+    margin-bottom: 1px;
+}
+
 input:focus{
     background-color: transparent;
     outline:transparent;
@@ -65,15 +90,18 @@ input::placeholder{
 
 label{
     color:#757575;
-    position:relative;
-    left:1.2em;
-    top:-1.3em;
+    position:absolute;
+    left:1.5rem;
+    top:50%;
+    transform: translateY(-50%);
     cursor:auto;
     transition:0.3s ease all;
+    pointer-events: none;
 }
 
 input:focus~label,input:not(:placeholder-shown)~label{
-    top:-3em;
+    top:0;
+    transform: translateY(-100%);
     color:rgb(125,125,235);
     font-size:15px;
 }
@@ -128,40 +156,6 @@ input:focus~label,input:not(:placeholder-shown)~label{
     margin-top: 20px;
 }
 
-.filter-sketch-container {
-    flex-basis: 30%;
-    text-align: center;
-}
-
-.filter-sketch {
-    font-size: 1rem;
-    border: 1px solid rgb(125,125,235);;
-    border-radius: 5px;
-    padding: 8px 15px;
-    background: white; 
-    color: rgb(125,125,235);
-    text-align: center;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.9s;
-}
-
-.filter-sketch:hover {
-    background: rgb(53, 53, 222);
-    color: white;
-
-}
-
-#filterSketchBox:hover {
-    background: rgb(53, 53, 222)
-}
-#fileName {
-    font-size: 12px;
-    margin-top: 5px; 
-    text-align: center; 
-    color: rgb(125,125,235);
-}
-
 .price-container {
     flex-basis: 30%;
 }
@@ -188,12 +182,16 @@ input:focus~label,input:not(:placeholder-shown)~label{
     margin: 10px 0;
 }
 
+#success {
+    color: green;
+}
+
 .back-btn {
     display: inline-block;
     padding: 10px;
     margin-top: 10px;
-    background-color: #ccc;
-    color: #333;
+    background-color:rgb(125,125,235);
+    color: white;
     text-decoration: none;
     border-radius: 50%;
     font-size: 18px;
@@ -201,6 +199,5 @@ input:focus~label,input:not(:placeholder-shown)~label{
 }
 
 .back-btn:hover {
-    background-color: #bbb;
-    color: #000;
+    background:#07001f;
 }
