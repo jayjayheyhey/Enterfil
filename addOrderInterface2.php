@@ -1,0 +1,203 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+    background-color: #c9d6ff;
+    background:linear-gradient(to right,#e2e2e2,#c9d6ff);
+}
+
+.container{
+    background:#fff;
+    width:650px;
+    padding:1.5rem;
+    margin:50px auto;
+    border-radius:10px;
+    box-shadow:0 20px 35px rgba(0,0,1,0.9);
+}
+
+form{
+    margin:1rem 2rem;
+}
+
+.form-title{
+    font-size:1.5rem;
+    font-weight:bold;
+    text-align:center;
+    padding:1.3rem;
+    margin-bottom:0.4rem;
+    color: rgb(125,125,235);
+}
+
+input{
+    color:inherit;
+    width:100%;
+    background-color:transparent;
+    border:none;
+    border-bottom:1px solid #757575;
+    padding-left:1.5rem;
+    font-size:15px;
+}
+
+.input-group{
+    padding:1% 0;
+    position:relative;
+    margin-bottom: 15px;
+}
+
+.input-group i{
+    position:absolute;
+    color:black;
+}
+
+/* Modified styles for horizontal layout of cap input and dropdown */
+.input-with-dropdown {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 15px;
+    gap: 10px;
+}
+
+.input-with-dropdown .input-group {
+    flex-grow: 1;
+    margin-bottom: 0;
+}
+
+.input-with-dropdown select {
+    width: 60px;
+    padding: 2px;
+    font-size: 12px;
+    border: 1px solid #757575;
+    background-color: white;
+    border-radius: 4px;
+    color: #333;
+    height: 25px;
+    margin-bottom: 1px;
+}
+
+input:focus{
+    background-color: transparent;
+    outline:transparent;
+    border-bottom:2px solid rgb(125,125,235);
+}
+
+input::placeholder{
+    color:transparent;
+}
+
+label{
+    color:#757575;
+    position:absolute;
+    left:1.5rem;
+    top:50%;
+    transform: translateY(-50%);
+    cursor:auto;
+    transition:0.3s ease all;
+    pointer-events: none;
+}
+
+input:focus~label,input:not(:placeholder-shown)~label{
+    top:0;
+    transform: translateY(-100%);
+    color:rgb(125,125,235);
+    font-size:15px;
+}
+
+.btn{
+    font-size:1.1rem;
+    padding:8px 0;
+    border-radius:5px;
+    outline:none;
+    border:none;
+    width:100%;
+    background:rgb(125,125,235);
+    color:white;
+    cursor:pointer;
+    transition:0.9s;
+    margin-top: 20px;
+}
+
+.btn:hover{
+    background:#07001f;
+}
+
+/* Additional styles for the new layout */
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.form-col {
+    width: 48%;
+}
+
+.divider {
+    height: 1px;
+    background-color: #c9d6ff;
+    margin: 20px 0;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 2rem 2rem;
+    color: rgb(125,125,235);
+}
+
+.bottom-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.price-container {
+    flex-basis: 30%;
+}
+
+.done-btn {
+    font-size: 1rem;
+    padding: 8px 15px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    background: rgb(125,125,235);
+    color: white;
+    cursor: pointer;
+    transition: 0.9s;
+}
+
+.done-btn:hover {
+    background: rgb(53, 53, 222)
+}
+
+.popup {
+    color: red;
+    text-align: center;
+    margin: 10px 0;
+}
+
+#success {
+    color: green;
+}
+
+.back-btn {
+    display: inline-block;
+    padding: 10px;
+    margin-top: 10px;
+    background-color:rgb(125,125,235);
+    color: white;
+    text-decoration: none;
+    border-radius: 50%;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+.back-btn:hover {
+    background:#07001f;
+}
