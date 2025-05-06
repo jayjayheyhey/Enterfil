@@ -142,13 +142,13 @@ if (isset($_GET['jobOrderNumber'])) {
         <div class="section-line"></div>
         <h3>Descriptions:</h3>
 
-        <div class="description"><span class="label">Cap:</span> <?= $order['cap'] ?></div>
-        <div class="description"><span class="label">Size:</span> <?= $order['size'] ?></div>
-        <div class="description"><span class="label">Gasket:</span> <?= $order['gasket'] ?></div>
-        <div class="description"><span class="label">O-Ring:</span> <?= $order['oring'] ?></div>
-        <div class="description"><span class="label">Filter Media:</span> <?= $order['filterMedia'] ?></div>
-        <div class="description"><span class="label">Inside Support:</span> <?= $order['insideSupport'] ?></div>
-        <div class="description"><span class="label">Outside Support:</span> <?= $order['outsideSupport'] ?></div>
+        <div class="description"><span class="label">Cap:</span> <?= $order['cap'] . $order['capUOM'] ?></div>
+        <div class="description"><span class="label">Size:</span> <?= $order['size'] . $order['sizeUOM'] ?></div>
+        <div class="description"><span class="label">Gasket:</span> <?= $order['gasket'] . $order['gasketUOM'] ?></div>
+        <div class="description"><span class="label">O-Ring:</span> <?= $order['oring'] . $order['oringUOM'] ?></div>
+        <div class="description"><span class="label">Filter Media:</span> <?= $order['filterMedia'] . $order['filterMediaUOM'] ?></div>
+        <div class="description"><span class="label">Inside Support:</span> <?= $order['insideSupport'] . $order['insideSupportUOM'] ?></div>
+        <div class="description"><span class="label">Outside Support:</span> <?= $order['outsideSupport'] . $order['outsideSupportUOM']?></div>
         <div class="description"><span class="label">Brand:</span> <?= $order['brand'] ?></div>
         <div class="description"><span class="label">Price:</span> ₱<?= number_format($order['price'], 2) ?></div>
 

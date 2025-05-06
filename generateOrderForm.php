@@ -56,13 +56,13 @@
         $pdf->Cell(0, 10, 'Descriptions:', 0, 1);
         $pdf->SetFont('Arial', '', 12);
 
-        $pdf->addUnderlineField('Cap', $order['cap']);
-        $pdf->addUnderlineField('Size', $order['size']);
-        $pdf->addUnderlineField('Gasket', $order['gasket']);
-        $pdf->addUnderlineField('O-Ring', $order['oring']);
-        $pdf->addUnderlineField('Filter Media', $order['filterMedia']);
-        $pdf->addUnderlineField('Inside Support', $order['insideSupport']);
-        $pdf->addUnderlineField('Outside Support', $order['outsideSupport']);
+        $pdf->addUnderlineField('Cap', $order['cap'] . $order['capUOM']);
+        $pdf->addUnderlineField('Size', $order['size'] . $order['sizeUOM']);
+        $pdf->addUnderlineField('Gasket', $order['gasket'] . $order['gasketUOM']);
+        $pdf->addUnderlineField('O-Ring', $order['oring'] . $order['oringUOM']);
+        $pdf->addUnderlineField('Filter Media', $order['filterMedia'] . $order['filterMediaUOM']);
+        $pdf->addUnderlineField('Inside Support', $order['insideSupport'] . $order['insideSupportUOM']);
+        $pdf->addUnderlineField('Outside Support', $order['outsideSupport'] . $order['outsideSupportUOM']);
         $pdf->addUnderlineField('Brand', $order['brand']);
         $pdf->addUnderlineField('Price ', 'P' . number_format($order['price'], 2));
 
