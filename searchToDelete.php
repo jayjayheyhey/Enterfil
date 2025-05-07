@@ -3,24 +3,6 @@ include("connect.php");
 
 $errorMessage = "";
 
-// ✅ 1. Handle redirect for deletion FIRST
-if (isset($_POST['deleteRedirect'])) {
-    $jobOrderNumber = $_POST['jobOrderNumber'];
-
-    $stmt = $conn->prepare("SELECT * FROM order_form WHERE jobOrderNumber = ?");
-    $stmt->bind_param("s", $jobOrderNumber);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-        header("Location: deleteOrder.php?jobOrderNumber=" . urlencode($jobOrderNumber));
-        exit();
-    } else {
-        $errorMessage = "Job Order Number not found for deletion.";
-    }
-}
-
-// ✅ 2. Handle search to edit after deletion check
 if (isset($_POST['searchButton'])) {
     $jobOrderNumber = $_POST['jobOrderNumber'];
 
@@ -30,7 +12,8 @@ if (isset($_POST['searchButton'])) {
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-        header("Location: editOrder.php?jobOrderNumber=" . urlencode($jobOrderNumber));
+        // Job order found, redirect to confirmation page
+        header("Location: deleteOrder.php?jobOrderNumber=" . urlencode($jobOrderNumber));
         exit();
     } else {
         $errorMessage = "Job Order Number not found.";
@@ -38,24 +21,22 @@ if (isset($_POST['searchButton'])) {
 }
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Search Job Order</title>
+    <title>Search Job Order for Deletion</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container" id="searchForm">
-        <h1 class="form-title">Enter Job Order Number to Edit</h1>
+        <h1 class="form-title">Enter Job Order Number to Delete</h1>
 
         <?php if (!empty($errorMessage)): ?>
             <p class="popup"><?php echo $errorMessage; ?></p>
         <?php endif; ?>
 
-        <form method="post" action="searchJobOrder.php">
+        <form method="post" action="searchToDelete.php">
             <div class="input-group">
                 <label for="jobOrderNumber">Job Order Number:</label>
                 <input type="text" name="jobOrderNumber" id="jobOrderNumber" required>

@@ -122,7 +122,7 @@ if (isset($_GET['jobOrderNumber'])) {
 
 
         <div class="row job-order-header">
-            <div><span class="label">Job Order No.:</span> <?= $order['jobOrderNumber'] ?></div>
+            <div><span class="label">Job Order No.</span> <?= $order['jobOrderNumber'] ?></div>
             <div><span class="label">Date Created:</span> <?= $order['dateCreated'] ?></div>
         </div>
         <div class="section-line"></div>

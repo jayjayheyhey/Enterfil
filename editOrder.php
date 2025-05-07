@@ -94,13 +94,13 @@ if (isset($_POST['updateButton']) || isset($_POST['draftButton']) || isset($_POS
             
             $null = NULL;
             $stmt->bind_param(
-                "ssisssssssssssssssssdbs",
+                "ssisssssssssssssssssbss",
                 $company, $items, $quantity, $requiredDate, $cap, 
                 $capUOM, $size, $sizeUOM, $gasket, $gasketUOM, 
                 $oring, $oringUOM, $filterMedia, $filterMediaUOM, $insideSupport, 
                 $insideSupportUOM, $outsideSupport, $outsideSupportUOM, $brand, $price, 
                 $null, $status, $jobOrderNumber
-            );
+            );            
 
             $stmt->send_long_data(20, $filterDrawing);
         } else {
@@ -109,17 +109,19 @@ if (isset($_POST['updateButton']) || isset($_POST['draftButton']) || isset($_POS
                 cap=?, capUOM=?, size=?, sizeUOM=?, gasket=?, gasketUOM=?, 
                 oring=?, oringUOM=?, filterMedia=?, filterMediaUOM=?, 
                 insideSupport=?, insideSupportUOM=?, outsideSupport=?, outsideSupportUOM=?, 
-                brand=?, price=?, status=? 
+                brand=?, price=?, filterDrawing=?, status=? 
                 WHERE jobOrderNumber=?");
 
             $stmt->bind_param(
-                "ssisssssssssssssssdsss",
-                $company, $items, $quantity, $requiredDate,
-                $cap, $capUOM, $size, $sizeUOM, $gasket, $gasketUOM,
-                $oring, $oringUOM, $filterMedia, $filterMediaUOM,
-                $insideSupport, $insideSupportUOM, $outsideSupport, $outsideSupportUOM, 
-                $brand, $price, $status, $jobOrderNumber
-            );
+                "ssisssssssssssssssssbss",
+                $company, $items, $quantity, $requiredDate, $cap, 
+                $capUOM, $size, $sizeUOM, $gasket, $gasketUOM, 
+                $oring, $oringUOM, $filterMedia, $filterMediaUOM, $insideSupport, 
+                $insideSupportUOM, $outsideSupport, $outsideSupportUOM, $brand, $price, 
+                $filterDrawing, $status, $jobOrderNumber
+            );     
+            $stmt->send_long_data(21, $filterDrawing);
+
         }
 
         if ($stmt->execute()) {
