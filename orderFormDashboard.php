@@ -50,7 +50,7 @@ if ($activeTab == 'draft') {
         <div class="action-buttons">
             <a href="addOrder.php" class="btn btn-primary">Add Order</a>
             <a href="searchJobOrder.php" class="btn btn-secondary">Edit Order</a>
-            <a href="searchToDelete.php" class="btn btn-secondary">Remove Order</a>
+            <a href="deleteOrder.php" class="btn btn-secondary">Remove Order</a>
             <a href="homepage.php" class="btn btn-tertiary">Inventory</a>
         </div>
         
