@@ -82,11 +82,10 @@ if (!$singleDeletion) {
         if ($statusFilter == 'all') {
             $query = "SELECT * FROM order_form WHERE 
                       jobOrderNumber LIKE ? OR 
-                      company LIKE ? OR 
-                      description LIKE ? 
+                      company LIKE ?
                       ORDER BY dateCreated DESC";
             $stmt = $conn->prepare($query);
-            $stmt->bind_param("sss", $searchTerm, $searchTerm, $searchTerm);
+            $stmt->bind_param("ss", $searchTerm, $searchTerm);
         } else {
             $query = "SELECT * FROM order_form WHERE 
                       (jobOrderNumber LIKE ? OR 
@@ -312,6 +311,14 @@ if (!$singleDeletion) {
                 <form method="post" id="deleteForm">
                     <div class="select-all-container">
                         <input type="checkbox" id="select-all"> <label for="select-all">Select All</label>
+                            <div id="delete-selected-container" style="display: none; margin-top: 20px;">
+                                <div class="warning-text">
+                                    <p><i class="fas fa-exclamation-triangle"></i> Warning: This action cannot be undone!</p>
+                                </div>
+                                <button type="submit" name="delete_selected" class="btn btn-danger" id="delete-selected-btn">
+                                    <i class="fas fa-trash"></i> Delete Selected Orders
+                                </button>
+                            </div>
                     </div>
                     
                     <table class="order-table">
@@ -352,14 +359,6 @@ if (!$singleDeletion) {
                         </tbody>
                     </table>
                     
-                    <div id="delete-selected-container" style="display: none; margin-top: 20px;">
-                        <div class="warning-text">
-                            <p><i class="fas fa-exclamation-triangle"></i> Warning: This action cannot be undone!</p>
-                        </div>
-                        <button type="submit" name="delete_selected" class="btn btn-danger" id="delete-selected-btn">
-                            <i class="fas fa-trash"></i> Delete Selected Orders
-                        </button>
-                    </div>
                 </form>
             <?php else: ?>
                 <div class="no-orders">
