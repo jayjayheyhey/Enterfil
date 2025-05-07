@@ -23,95 +23,18 @@ if (isset($_GET['jobOrderNumber'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="dashboard.css">
-    <link rel="stylesheet" href="search.css">
-    <link rel="stylesheet" href="border.css">
-    <link rel="stylesheet" href="tablestyle2.css">
-    <style>
-        .section-line {
-            border-top: 2px solid #000;
-            margin: 20px 0;
-        }
+    <link rel="stylesheet" href="orderDetails.css">
 
-        .row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-
-        .label {
-            font-weight: bold;
-            min-width: 150px;
-        }
-
-        .description {
-            margin-bottom: 12px;
-        }
-
-        .drawing {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .drawing img {
-            border: 1px solid #333;
-            margin-top: 10px;
-            max-width: 100%;
-            height: auto;
-        }
-
-        .back-link {
-            margin-top: 30px;
-            display: inline-block;
-            text-decoration: none;
-            color: #fff;
-            background-color: rgb(125, 125, 235);
-            padding: 10px 20px;
-            border-radius: 5px;
-            transition: background 0.3s ease;
-        }
-
-        .back-link:hover {
-            background-color: #07001f;
-        }
-
-        h3 {
-            margin-top: 25px;
-        }
-
-        .description .label {
-            display: inline-block;
-            width: 180px;
-        }
-
-        .job-order-header {
-            font-size: 1.3rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-            justify-content: space-between;
-        }
-
-        .downloadlink {
-            font-size:16px;          /* Standard font size */
-            color: rgb(113, 113, 181);           /* Blue color for the link */
-            text-decoration: none;    /* Remove the underline */
-            font-weight: normal;      /* Default weight */
-            cursor: pointer;         /* Change cursor to indicate clickable link */
-            text-decoration: underline;
-        }
-
-        .downloadlink:hover {
-            text-decoration: underline; /* Underline when hovered */
-            font-weight: bold;          /* Make the text bold when hovered */
-            color: rgb(82, 82, 139);           /* Blue color for the link */
-        }
-
-    </style>
 </head>
 <body>
     
     <div class="container">
-    <a href="javascript:history.back()" class="back-btn"><i class="fas fa-arrow-left"></i></a>
-
+    <div class="backEdit">
+        <a href="javascript:history.back()" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+        <a href="editOrder.php?jobOrderNumber=<?php echo htmlspecialchars($order['jobOrderNumber']); ?>" class="btn btn-sm btn-secondary">
+            <i class="fas fa-edit"></i> Edit
+        </a>
+    </div>
         <div class="right-align" style="margin-top: 10px; margin-bottom:20px;">
             <i class="fas fa-clipboard"></i>
             <a href="generateOrderForm.php?jobOrderNumber=<?= $order['jobOrderNumber'] ?>" 

@@ -121,132 +121,8 @@ if (!$singleDeletion) {
     <title>Delete Orders</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="orderFormDashboard2.css">
-    <style>
-        .delete-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        .order-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        
-        .order-table th, .order-table td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        
-        .order-table th {
-            background-color: #f2f2f2;
-            font-weight: bold;
-        }
-        
-        .order-table tr:hover {
-            background-color: #f5f5f5;
-        }
-        
-        .action-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 20px 0;
-        }
-        
-        .status-filter {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .status-badge {
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 14px;
-            color: white;
-        }
-        
-        .status-draft { background-color: #6c757d; }
-        .status-active { background-color: #007bff; }
-        .status-finished { background-color: #28a745; }
-        
-        .select-all-container {
-            margin-bottom: 10px;
-        }
-        
-        .warning-text {
-            color: #dc3545;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-        
-        .confirmation-box {
-            background-color: #f8d7da;
-            border: 1px solid #f5c6cb;
-            border-radius: 4px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-        
-        .no-orders {
-            text-align: center;
-            padding: 40px;
-            color: #6c757d;
-        }
-        
-        .search-box {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        
-        .search-box input {
-            flex-grow: 1;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        
-        .message {
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 4px;
-        }
-        
-        .error {
-            background-color: #f8d7da;
-            border: 1px solid #f5c6cb;
-            color: #721c24;
-        }
-        
-        .success {
-            background-color: #d4edda;
-            border: 1px solid #c3e6cb;
-            color: #155724;
-        }
-        
-        /* Responsive design for mobile */
-        @media (max-width: 768px) {
-            .action-bar, .status-filter {
-                flex-direction: column;
-                gap: 5px;
-            }
-            
-            .search-box {
-                flex-direction: column;
-            }
-            
-            .order-table {
-                font-size: 14px;
-            }
-            
-            .order-table th, .order-table td {
-                padding: 8px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="manageOrder.css">
+
 </head>
 <body>
     <div class="<?php echo $singleDeletion ? 'container' : 'delete-container'; ?>">
@@ -268,7 +144,7 @@ if (!$singleDeletion) {
             </div>
         <?php else: ?>
             <!-- Multiple Order Management & Search Interface -->
-            <h1>Manage and Delete Orders</h1>
+            <h1>Manage Orders</h1>
             
             <?php if (!empty($errorMessage)): ?>
                 <div class="message error">
@@ -350,9 +226,15 @@ if (!$singleDeletion) {
                                         <a href="deleteOrder.php?jobOrderNumber=<?php echo htmlspecialchars($order['jobOrderNumber']); ?>" class="btn btn-sm btn-danger">
                                             <i class="fas fa-trash"></i> Delete
                                         </a>
-                                        <a href="orderDetails.php?jobOrderNumber=<?php echo htmlspecialchars($order['jobOrderNumber']); ?>" class="btn btn-sm btn-secondary">
-                                            <i class="fas fa-eye"></i> View
-                                        </a>
+                                        <?php if ($order['status'] == 'active'): ?>
+                                            <a href="orderDetails.php?jobOrderNumber=<?php echo htmlspecialchars($order['jobOrderNumber']); ?>" class="btn btn-sm btn-secondary fixed-width-btn">
+                                                <i class="fas fa-eye"></i> View
+                                            </a>
+                                        <?php elseif ($order['status'] == 'draft'): ?>
+                                            <a href="editOrder.php?jobOrderNumber=<?php echo htmlspecialchars($order['jobOrderNumber']); ?>" class="btn btn-sm btn-secondary fixed-width-btn">
+                                                <i class="fas fa-edit"></i> Edit
+                                            </a>
+                                        <?php endif; ?>
                                     </td>
                                 </tr>
                             <?php endwhile; ?>

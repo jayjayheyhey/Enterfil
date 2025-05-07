@@ -153,19 +153,19 @@ if (isset($_POST['updateButton']) || isset($_POST['draftButton']) || isset($_POS
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="addOrderInterface4.css">
-    <link rel="stylesheet" href="font.css">
+    <link rel="stylesheet" href="orderFormDashboard2.css">
+    <link rel="stylesheet" href="editOrder.css">
     <title>Edit Order Form</title>
 </head>
 <body>
-    <div class="container" id="editOrderInterface">
+    <div class="edit-container">
         <a href="orderFormDashboard.php" class="back-btn">
-            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-left"></i> Back to Dashboard
         </a>
         <h1 class="form-title">Edit Order: <?= htmlspecialchars($jobOrderNumber) ?></h1>
         
         <?php if (!empty($errorMessage)): ?>
-            <p class="popup"><?php echo $errorMessage; ?></p>
+            <div class="popup"><?php echo $errorMessage; ?></div>
         <?php endif; ?>
 
         <form method="post" enctype="multipart/form-data">
@@ -336,8 +336,8 @@ if (isset($_POST['updateButton']) || isset($_POST['draftButton']) || isset($_POS
                 </div>
                 
                 <div class="buttons-container">
-                    <button type="submit" class="draft-btn" name="draftButton" id="statusButton">SAVE AS DRAFT</button>
-                    <button type="submit" class="done-btn" name="submitButton" id="statusButton">SUBMIT ORDER</button>
+                    <button type="submit" class="draft-btn" name="draftButton" <?php echo ($submittedData['status'] == 'active') ? 'disabled' : ''; ?>>SAVE AS DRAFT</button>
+                    <button type="submit" class="done-btn" name="submitButton">SUBMIT ORDER</button>
                 </div>
             </div>
         </form>
