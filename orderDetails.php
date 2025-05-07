@@ -110,6 +110,8 @@ if (isset($_GET['jobOrderNumber'])) {
 <body>
     
     <div class="container">
+    <a href="javascript:history.back()" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+
         <div class="right-align" style="margin-top: 10px; margin-bottom:20px;">
             <i class="fas fa-clipboard"></i>
             <a href="generateOrderForm.php?jobOrderNumber=<?= $order['jobOrderNumber'] ?>" 
@@ -162,7 +164,6 @@ if (isset($_GET['jobOrderNumber'])) {
             <?php endif; ?>
         </div>
 
-        <a class="back-link" href="orderFormDashboard.php">Back to Dashboard</a>
     </div>
 </body>
 </html>
