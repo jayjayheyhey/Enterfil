@@ -53,10 +53,13 @@ if (isset($_POST['updateButton']) || isset($_POST['draftButton']) || isset($_POS
     
     $status = (isset($_POST['draftButton'])) ? 'draft' : 'active';
 
-    $filterDrawing = null;
     $uploadError = false;
+    $updateDrawing = false;
+    $filterDrawing = null;
 
+    // Check if a new file is uploaded
     if (isset($_FILES['filterDrawing']) && $_FILES['filterDrawing']['error'] === 0) {
+        $updateDrawing = true;
         $tmpName = $_FILES['filterDrawing']['tmp_name'];
         $filterDrawing = file_get_contents($tmpName);
 
@@ -65,6 +68,7 @@ if (isset($_POST['updateButton']) || isset($_POST['draftButton']) || isset($_POS
             $errorMessage = "Failed to read uploaded file";
         }
     } else if (isset($_FILES['filterDrawing']) && $_FILES['filterDrawing']['error'] !== UPLOAD_ERR_NO_FILE) {
+        // Handle upload errors
         $uploadError = true;
         switch($_FILES['filterDrawing']['error']) {
             case UPLOAD_ERR_INI_SIZE:
@@ -83,7 +87,9 @@ if (isset($_POST['updateButton']) || isset($_POST['draftButton']) || isset($_POS
     }
 
     if (!$uploadError) {
-        if (isset($_FILES['filterDrawing']) && $_FILES['filterDrawing']['error'] === 0) {
+        // Prepare the SQL query - different for with/without new drawing
+        if ($updateDrawing) {
+            // New drawing uploaded
             $stmt = $conn->prepare("UPDATE order_form SET 
                 company=?, items=?, quantity=?, requiredDate=?, 
                 cap=?, capUOM=?, size=?, sizeUOM=?, gasket=?, gasketUOM=?, 
@@ -91,37 +97,33 @@ if (isset($_POST['updateButton']) || isset($_POST['draftButton']) || isset($_POS
                 insideSupport=?, insideSupportUOM=?, outsideSupport=?, outsideSupportUOM=?, 
                 brand=?, price=?, filterDrawing=?, status=? 
                 WHERE jobOrderNumber=?");
-            
-            $null = NULL;
+                
             $stmt->bind_param(
-                "ssisssssssssssssssssbss",
-                $company, $items, $quantity, $requiredDate, $cap, 
-                $capUOM, $size, $sizeUOM, $gasket, $gasketUOM, 
-                $oring, $oringUOM, $filterMedia, $filterMediaUOM, $insideSupport, 
-                $insideSupportUOM, $outsideSupport, $outsideSupportUOM, $brand, $price, 
-                $null, $status, $jobOrderNumber
-            );            
-
-            $stmt->send_long_data(20, $filterDrawing);
-        } else {
-            $stmt = $conn->prepare("UPDATE order_form SET 
-                company=?, items=?, quantity=?, requiredDate=?, 
-                cap=?, capUOM=?, size=?, sizeUOM=?, gasket=?, gasketUOM=?, 
-                oring=?, oringUOM=?, filterMedia=?, filterMediaUOM=?, 
-                insideSupport=?, insideSupportUOM=?, outsideSupport=?, outsideSupportUOM=?, 
-                brand=?, price=?, filterDrawing=?, status=? 
-                WHERE jobOrderNumber=?");
-
-            $stmt->bind_param(
-                "ssisssssssssssssssssbss",
+                "ssissssssssssssssssdsss",
                 $company, $items, $quantity, $requiredDate, $cap, 
                 $capUOM, $size, $sizeUOM, $gasket, $gasketUOM, 
                 $oring, $oringUOM, $filterMedia, $filterMediaUOM, $insideSupport, 
                 $insideSupportUOM, $outsideSupport, $outsideSupportUOM, $brand, $price, 
                 $filterDrawing, $status, $jobOrderNumber
-            );     
-            $stmt->send_long_data(21, $filterDrawing);
+            );
+        } else {
+            // No new drawing - leave the existing one untouched
+            $stmt = $conn->prepare("UPDATE order_form SET 
+                company=?, items=?, quantity=?, requiredDate=?, 
+                cap=?, capUOM=?, size=?, sizeUOM=?, gasket=?, gasketUOM=?, 
+                oring=?, oringUOM=?, filterMedia=?, filterMediaUOM=?, 
+                insideSupport=?, insideSupportUOM=?, outsideSupport=?, outsideSupportUOM=?, 
+                brand=?, price=?, status=? 
+                WHERE jobOrderNumber=?");
 
+            $stmt->bind_param(
+                "ssissssssssssssssssdss",
+                $company, $items, $quantity, $requiredDate, $cap, 
+                $capUOM, $size, $sizeUOM, $gasket, $gasketUOM, 
+                $oring, $oringUOM, $filterMedia, $filterMediaUOM, $insideSupport, 
+                $insideSupportUOM, $outsideSupport, $outsideSupportUOM, $brand, $price, 
+                $status, $jobOrderNumber
+            );
         }
 
         if ($stmt->execute()) {
