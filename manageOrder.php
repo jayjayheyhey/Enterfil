@@ -139,7 +139,7 @@ if (!$singleDeletion) {
 
                 <form method="post">
                     <input type="submit" class="btn btn-danger" name="delete_single" value="Yes, Delete">
-                    <a href="deleteOrder.php" class="btn">Cancel</a>
+                    <a href="manageOrder.php" class="btn">Cancel</a>
                 </form>
             </div>
         <?php else: ?>
@@ -165,7 +165,7 @@ if (!$singleDeletion) {
                     <i class="fas fa-search"></i> Search
                 </button>
                 <?php if (!empty($searchQuery)): ?>
-                    <a href="deleteOrder.php?status=<?php echo $statusFilter; ?>" class="btn btn-secondary">
+                    <a href="manageOrder.php?status=<?php echo $statusFilter; ?>" class="btn btn-secondary">
                         <i class="fas fa-times"></i> Clear
                     </a>
                 <?php endif; ?>
@@ -223,7 +223,7 @@ if (!$singleDeletion) {
                                         </span>
                                     </td>
                                     <td>
-                                        <a href="deleteOrder.php?jobOrderNumber=<?php echo htmlspecialchars($order['jobOrderNumber']); ?>" class="btn btn-sm btn-danger">
+                                        <a href="manageOrder.php?jobOrderNumber=<?php echo htmlspecialchars($order['jobOrderNumber']); ?>" class="btn btn-sm btn-danger">
                                             <i class="fas fa-trash"></i> Delete
                                         </a>
                                         <?php if ($order['status'] == 'active'): ?>
@@ -247,7 +247,7 @@ if (!$singleDeletion) {
                     <i class="fas fa-clipboard-list" style="font-size: 48px; margin-bottom: 20px;"></i>
                     <?php if (!empty($searchQuery)): ?>
                         <p>No orders found matching your search criteria</p>
-                        <a href="deleteOrder.php" class="btn btn-primary">Show All Orders</a>
+                        <a href="manageOrder.php" class="btn btn-primary">Show All Orders</a>
                     <?php else: ?>
                         <p>No orders found matching the selected status</p>
                     <?php endif; ?>

@@ -177,11 +177,20 @@ h1 {
 }
 
 .btn-tertiary {
+    background-color: #786ff7;
+    color: white;
+}
+
+.btn-tertiary:hover {
+    background-color: #867efe;
+}
+
+.btn-quarternary {
     background-color: #81ecec;
     color: #2d3436;
 }
 
-.btn-tertiary:hover {
+.btn-quarternary:hover {
     background-color: #74d5d5;
 }
 
