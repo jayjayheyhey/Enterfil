@@ -82,7 +82,7 @@
                     $pdf->Ln(0);
                     
                     $pageWidth = $pdf->GetPageWidth() - 20;
-                    $pageHeight = $pdf->GetPageHeight() - $pdf->GetY() - 30;
+                    $pageHeight = $pdf->GetPageHeight() - $pdf->GetY() - 40;
         
                     list($imgWidth, $imgHeight) = getimagesize($imgPath);
                     $imgRatio = $imgWidth / $imgHeight;
