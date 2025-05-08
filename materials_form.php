@@ -46,16 +46,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $updateStmt->bind_param("i", $jobOrderNumber); // Changed from "s" to "i" for INT type
             $updateStmt->execute();
             
-            // Insert materials used records
-            $insertStmt = $conn->prepare("INSERT INTO materials_used (jobOrderNumber, filterCode, quantity, usageDate) VALUES (?, ?, ?, CURRENT_DATE())");
+            // // Insert materials used records
+            // $insertStmt = $conn->prepare("INSERT INTO materials_used (jobOrderNumber, filterCode, quantity, usageDate) VALUES (?, ?, ?, CURRENT_DATE())");
             
-            foreach ($materials as $index => $filterCode) {
-                if (!empty($filterCode) && isset($quantities[$index]) && is_numeric($quantities[$index])) {
-                    $quantity = floatval($quantities[$index]);
-                    $insertStmt->bind_param("isd", $jobOrderNumber, $filterCode, $quantity); // Changed first param from "s" to "i" for INT type
-                    $insertStmt->execute();
-                }
-            }
+            // foreach ($materials as $index => $filterCode) {
+            //     if (!empty($filterCode) && isset($quantities[$index]) && is_numeric($quantities[$index])) {
+            //         $quantity = floatval($quantities[$index]);
+            //         $insertStmt->bind_param("isd", $jobOrderNumber, $filterCode, $quantity); // Changed first param from "s" to "i" for INT type
+            //         $insertStmt->execute();
+            //     }
+            // }
 
             $updateFilterStmt = $conn->prepare("UPDATE filters SET Quantity = Quantity - ? WHERE FilterCode = ?");
 
