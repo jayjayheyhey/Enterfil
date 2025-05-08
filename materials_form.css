@@ -1,0 +1,129 @@
+         body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f7f7f7;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            margin-top: 0;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .invalid-material {
+            border-color: #ff0000;
+            background-color: #ffeeee;
+        }
+        .material-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+        .material-code {
+            flex: 2;
+        }
+        .material-name {
+            flex: 3;
+        }
+        .material-quantity {
+            flex: 1;
+        }
+        .material-action {
+            flex: 0 0 40px;
+        }
+        .add-material {
+            margin-bottom: 20px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .btn-primary {
+            background-color: #4CAF50;
+            font-size: .8rem;
+
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #45a049;
+        }
+        .btn-secondary {
+            font-size: .8rem;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            background-color: #f44336;
+            color: white;
+        }
+        .btn-secondary:hover {
+            background-color: #d32f2f;
+        }
+        .btn-add {
+            background-color: #2196F3;
+            color: white;
+            padding: 5px 10px;
+        }
+        .btn-remove {
+            background-color: #f44336;
+            color: white;
+            font-size: 16px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            padding: 0;
+            line-height: 1;
+        }
+        .error-message {
+            color: #f44336;
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #ffebee;
+            border-radius: 4px;
+        }
+        .ui-autocomplete {
+            max-height: 200px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        .ui-menu-item {
+            padding: 5px;
+        }
+        .job-info {
+            background-color: #e8f5e9;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+ 

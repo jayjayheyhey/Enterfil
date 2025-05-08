@@ -61,66 +61,8 @@ if (isset($_GET['error'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="orderFormDashboard2.css">
+    <link rel="stylesheet" href="orderFormDashboard5.css">
     <title>Order Dashboard</title>
-    <style>
-        /* Additional styles for the message display */
-        .message {
-            padding: 10px 15px;
-            margin: 10px 0;
-            border-radius: 4px;
-            font-weight: 500;
-        }
-        .success {
-            background-color: #e0f2e9;
-            color: #1e7e34;
-            border: 1px solid #b8e0ca;
-        }
-        .error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-        
-        /* Styles for the mark-as-done button */
-        .btn-done {
-            background-color: #28a745;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            font-size: 0.9em;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 5px;
-        }
-        .btn-done:hover {
-            background-color: #218838;
-        }
-        
-        /* Style for the buttons container to allow multiple buttons */
-        .card-buttons {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        
-        /* Finished status indicator */
-        .status-finished {
-            background-color: #28a745;
-            color: white;
-        }
-        
-        /* Completion date info */
-        .completion-date {
-            font-style: italic;
-            margin-top: 5px;
-            font-size: 0.9em;
-            color: #666;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
@@ -180,8 +122,7 @@ if (isset($_GET['error'])) {
                         <a class="btn btn-primary" href="<?= $buttonLink ?>"><?= $buttonText ?></a>
                         
                         <?php if ($activeTab == 'active'): ?>
-                            <a class="btn btn-done" href="markAsDone.php?jobOrderNumber=<?= $row['jobOrderNumber'] ?>" 
-                               onclick="return confirm('Are you sure you want to mark this order as done?');">
+                            <a class="btn btn-done" href="#" onclick="showMarkAsDoneConfirmation(<?= $row['jobOrderNumber'] ?>); return false;">
                                 <i class="fas fa-check"></i> Mark as Done
                             </a>
                         <?php endif; ?>
@@ -214,6 +155,41 @@ if (isset($_GET['error'])) {
                 }, 5000);
             }
         });
+
+        function showMarkAsDoneConfirmation(jobOrderNumber) {
+            // Create modal container
+            const modal = document.createElement('div');
+            modal.className = 'custom-modal';
+            
+            // Create modal content
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <h3>Confirmation</h3>
+                    <p>Are you sure you want to mark this order as done?</p>
+                    <div class="modal-buttons">
+                        <button class="btn-yes" onclick="window.location.href='markAsDone.php?jobOrderNumber=${jobOrderNumber}'">Yes</button>
+                        <button class="btn-view" onclick="window.location.href='orderDetails.php?jobOrderNumber=${jobOrderNumber}&showMarkAsDone=true'">View Order</button>
+                        <button class="btn-no" onclick="closeModal()">No</button>
+                    </div>
+                </div>
+            `;
+            
+            // Add to document
+            document.body.appendChild(modal);
+            
+            // Prevent background scrolling
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            // Find and remove the modal
+            const modal = document.querySelector('.custom-modal');
+            if (modal) {
+                modal.remove();
+                document.body.style.overflow = '';
+            }
+        }
+
     </script>
 </body>
 </html>

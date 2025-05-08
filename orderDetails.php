@@ -1,6 +1,5 @@
 <?php
 include("connect.php");
-
 if (isset($_GET['jobOrderNumber'])) {
     $jobOrderNumber = $_GET['jobOrderNumber'];
 
@@ -23,7 +22,7 @@ if (isset($_GET['jobOrderNumber'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="dashboard.css">
-    <link rel="stylesheet" href="orderDetails.css">
+    <link rel="stylesheet" href="orderDetails4.css">
 
 </head>
 <body>
@@ -31,24 +30,38 @@ if (isset($_GET['jobOrderNumber'])) {
     <div class="container">
     <div class="backEdit">
         <a href="javascript:history.back()" class="back-btn"><i class="fas fa-arrow-left"></i></a>
-        <a href="editOrder.php?jobOrderNumber=<?php echo htmlspecialchars($order['jobOrderNumber']); ?>" class="btn btn-sm btn-secondary">
+        <a href="editOrder.php?jobOrderNumber=<?php echo htmlspecialchars($order['jobOrderNumber']); ?>" class="btn btn-sm btn-secondary"
+        <?php echo ($order['status'] == 'finished') ? 'hidden' : ''; ?> >
             <i class="fas fa-edit"></i> Edit
         </a>
     </div>
-        <div class="right-align" style="margin-top: 10px; margin-bottom:20px;">
-            <i class="fas fa-clipboard"></i>
-            <a href="generateOrderForm.php?jobOrderNumber=<?= $order['jobOrderNumber'] ?>" 
-            id="downloadLink" 
-            class="downloadlink" 
-            style="font-family: Arial, sans-serif;">
-                <span class="emphasize">Download Order Form</span>
-            </a>
+
+    <div class="backEdit" style="margin-top: 10px; margin-bottom:20px;">
+        <div class="download"><i class="fas fa-clipboard"></i>
+        <a href="generateOrderForm.php?jobOrderNumber=<?= $order['jobOrderNumber'] ?>" 
+        id="downloadLink" 
+        class="downloadlink" 
+        style="font-family: Arial, sans-serif;">
+            <span class="emphasize">Download Order Form</span>
+        </a>
         </div>
+        
+        <?php if (isset($_GET['showMarkAsDone']) && $_GET['showMarkAsDone'] == 'true' && $order['status'] != 'finished'): ?>
+            <div class="mark-done-container">
+                <a href="markAsDone.php?jobOrderNumber=<?php echo htmlspecialchars($order['jobOrderNumber']); ?>" class="btn-done">
+                    <i class="fas fa-check"></i> Mark as Done
+                </a>
+            </div>
+        <?php endif; ?>
+    </div>
 
 
         <div class="row job-order-header">
             <div><span class="label">Job Order No.</span> <?= $order['jobOrderNumber'] ?></div>
             <div><span class="label">Date Created:</span> <?= $order['dateCreated'] ?></div>
+            <div id= "completed" <?php echo ($order['status'] != 'finished') ? 'hidden' : ''; ?>>
+                <span class="label">Date Completed:</span> <?= $order['completionDate'] ?>
+            </div>
         </div>
         <div class="section-line"></div>
 

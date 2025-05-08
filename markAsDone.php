@@ -11,7 +11,7 @@ $jobOrderNumber = $_GET['jobOrderNumber'];
 
 // Verify the order exists and is active
 $stmt = $conn->prepare("SELECT status FROM order_form WHERE jobOrderNumber = ?");
-$stmt->bind_param("s", $jobOrderNumber);
+$stmt->bind_param("i", $jobOrderNumber); // Changed from "s" to "i" for INT type
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -28,17 +28,7 @@ if ($order['status'] !== 'active') {
     exit;
 }
 
-// Update status to finished
-$updateStmt = $conn->prepare("UPDATE order_form SET status = 'finished', completionDate = CURRENT_DATE() WHERE jobOrderNumber = ?");
-$updateStmt->bind_param("s", $jobOrderNumber);
-
-if ($updateStmt->execute()) {
-    // Success
-    header("Location: orderFormDashboard.php?tab=finished&success=marked_done");
-    exit;
-} else {
-    // Error
-    header("Location: orderFormDashboard.php?tab=active&error=update_failed");
-    exit;
-}
+// Instead of directly marking as done, redirect to the materials input form
+header("Location: materials_form.php?jobOrderNumber=" . urlencode($jobOrderNumber));
+exit;
 ?>
