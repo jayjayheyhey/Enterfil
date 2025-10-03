@@ -1,0 +1,332 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #f0f2f5;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 24px;
+}
+
+/* Tab styling */
+.tabs {
+    display: flex;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+.tab {
+    text-decoration: none;
+    margin-right: .2rem;
+    border-bottom: none;
+    color: #6c5ce7;
+    padding: 10px 20px;
+    cursor: pointer;
+    background: #ffffff;;
+    font-size: 16px;
+    font-weight: 500;
+    position: relative;
+}
+
+.tab.active {
+    color: #000000;
+    border: 1px solid #ddd;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+    font-weight: bold;
+}
+
+.tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #6c5ce7;
+}
+
+/* Order cards styling */
+.order-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.order-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    position: relative;
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.order-number {
+    font-weight: bold;
+    font-size: 18px;
+    color: #333;
+}
+
+.order-status {
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.status-draft {
+    background-color: #ffeaa7;
+    color: #d35400;
+}
+
+.status-active {
+    background-color: #19f62b;
+    color: #f7f7f7;
+}
+
+.status-finished {
+    background-color: #828282;
+    color: #d0d0d0;
+}
+
+.order-details {
+    margin-bottom: 15px;
+}
+
+.order-detail {
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.view-btn {
+    display: inline-block;
+    padding: 8px 20px;
+    background-color: #4169e1;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.view-btn:hover {
+    background-color: #3050c1;
+}
+
+/* Action buttons */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    justify-content: flex-start;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    transition: background-color 0.3s;
+    height: 38px;
+    line-height: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-primary {
+    background-color: #6c5ce7;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #5649c8;
+}
+
+.btn-secondary {
+    background-color: #a29bfe;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #867efe;
+}
+
+.btn-tertiary {
+    background-color: #786ff7;
+    color: white;
+}
+
+.btn-tertiary:hover {
+    background-color: #867efe;
+}
+
+.btn-quarternary {
+    background-color: #81ecec;
+    color: #2d3436;
+}
+
+.btn-quarternary:hover {
+    background-color: #74d5d5;
+}
+
+/* Empty state */
+.empty-state {
+    text-align: center;
+    padding: 40px 0;
+    color: #777;
+}
+
+.empty-state i {
+    font-size: 50px;
+    margin-bottom: 15px;
+    color: #ddd;
+}
+
+.empty-state p {
+    font-size: 18px;
+}
+
+.custom-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    text-align: center;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-yes {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-view {
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-no {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+ /* Additional styles for the message display */
+ .message {
+    padding: 10px 15px;
+    margin: 10px 0;
+    border-radius: 4px;
+    font-weight: 500;
+}
+.success {
+    background-color: #e0f2e9;
+    color: #1e7e34;
+    border: 1px solid #b8e0ca;
+}
+.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Styles for the mark-as-done button */
+.btn-done {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 0.9em;
+    text-decoration: none;
+    height: 38px;
+    line-height: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 15px;
+
+}
+.btn-done:hover {
+    background-color: #218838;
+}
+
+/* Style for the buttons container to allow multiple buttons */
+.card-buttons {
+    display: flex;
+    gap: 10px;
+    /* height: .9rem; */
+}
+
+/* Completion date info */
+.completion-date {
+    font-style: italic;
+    margin-top: 5px;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.fa-check{
+    margin-right: 5px;
+}
